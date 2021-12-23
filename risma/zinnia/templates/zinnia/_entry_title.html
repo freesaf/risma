@@ -1,0 +1,24 @@
+<h1>
+	<a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+        {{ object.title }}
+    </a>
+	<span class="sous_titre">{{ object.creation_date|date:"DATE_FORMAT" }} 
+		{% if object.authors.count %}
+			écrit par 
+			<span class="vert">
+		      {% for author in object.authors.all %}
+		      <a href="{% url zinnia_author_detail author %}" title="Publications de {{ author }}">{{ author }}</a>
+		      {% if not forloop.last %}, {% endif %}
+		      {% endfor %}
+			</span>
+	    {% endif %}	
+		dans 
+		<span class="vert">
+		 {% if object.categories.count %}
+		      {% for category in object.categories.all %}
+		        <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">{{ category }}</a>
+		        {% if not forloop.last %}, {% endif %}
+			  {% endfor %}
+		  {% endif %}.
+	</span></span>
+</h1>

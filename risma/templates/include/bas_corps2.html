@@ -1,0 +1,30 @@
+<h3>{% load  flatpages_tags thumbnail %}
+<div id="" class=""></h3>
+	<div id="widget_pages" class="colonne">
+		<div class="wgt_dynamique">
+			<a href="/carte-des-implantations/"><img src="{{ MEDIA_URL }}images/widget_strategie.png" alt="strategie" /></a>
+		</div>
+	</div>
+	<div id="widget_dynamique" class="right">
+		<div class="none wgt_dynamique">
+			<a href="{% url contact %}"><img src="{{ MEDIA_URL }}images/widget_contact.png" alt="nous contacter" /></a>
+		</div>
+		<div class="none wgt_dynamique">
+			<a href="{% url offre_list %}"><img src="{{ MEDIA_URL }}images/widget_rejoindre.png" alt="Nous rejoindre" /></a>
+		</div>
+		<div class="none wgt_dynamique">
+			<a href="/investisseurs/"><img src="{{ MEDIA_URL }}images/widget_investi.png" alt="Investisseur" /></a>
+		</div>
+		<div class="none wgt_dynamique">
+			<a href="/presse/communique/"><img src="{{ MEDIA_URL }}images/widget_presse.png" alt="Investisseur" /></a>
+		</div>
+		<div class="none wgt_dynamique">
+			<a href="{% url zinnia_entry_archive_index %}"><img src="{{ MEDIA_URL }}images/widget_news.png" alt="news" /></a>
+		</div>
+	</div>
+	<div class="clr"></div>
+</div>
+<script type="text/javascript">
+	var nombre_wgt = $(".wgt_dynamique").length-1;
+	$(".wgt_dynamique").eq(Math.round(Math.random()*nombre_wgt)).show();
+</script>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load mediatheque_tags %}
+{% block content %}
+	{% for i in images %}
+		<img src="{{ MEDIA_URL }}{{ i.image }}" title="{{ i }}" />
+	{% endfor %}
+	
+{% endblock %}
+

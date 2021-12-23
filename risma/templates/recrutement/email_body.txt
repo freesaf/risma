@@ -1,0 +1,11 @@
+Envoyé par : {{ recrutement.email }} 
+Nom : {{ recrutement.nom }} 
+Prénom : {{ recrutement.prenom }} 
+Date de naissance : {{ recrutement.date_naissance }} 
+Ville : {{ recrutement.ville }} 
+Téléphone : {{ recrutement.telephone }} 
+E-mail : {{ recrutement.email }} 
+Message : {{ recrutement.message }} 
+Date d'envoi de la demande : {{ recrutement.date }} 
+
+

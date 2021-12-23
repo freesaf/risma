@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load newsletter_tags %}
+
+<div id="newsletter" class="centerAuto">
+	<form action="{% url newsletter_register %}" method="post" class="typeLabel">
+		{% csrf_token %}
+		<ul class="horizontal">
+			<li class="li_input">
+				{{ newsletter_form }}
+				
+			</li>
+			<li  class="li_submit"><input type="submit" value="ENVOYER" /></li>
+		</ul>
+		<div class="clr"></div>
+	</form>
+</div>

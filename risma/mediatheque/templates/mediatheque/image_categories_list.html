@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block content %}
+<h1 class="titre mediatheque uppercase font23 bottom20">{% trans "photothéque" %}</h1>
+<div class="barre_blanc"></div>
+	{% for cat in categories %}
+		<div class="affiche bottom15 {% cycle 'colonne' 'right' %}">
+			<ul class="horizontal">
+				<li class="photo_affiche">
+					{% if cat.image_principale %} 
+						<a href="{% url mediatheque:image_categories_list %}"><img src="{% thumbnail cat.image_principale 120x120 crop %}" alt="{{ cat }}" /></a>
+					{% else %}
+						<a href="{% url mediatheque:image_categories_list %}"><img src="{{ MEDIA_URL }}images/no_thumb.jpg" alt="{{ cat }}" /></a>
+					{% endif %}
+				</li>
+				<li class="texte_affiche">
+					<p class="rouge_color font15 bold bottom5">
+						<a class="rouge_color" href="{{ cat.get_absolute_url }}">— {{ cat }}</a>
+					</p>
+					<p>
+						<a class="bold" href="{{ cat.get_absolute_url }}" title="{{ cat }}">> AFFICHER LES PHOTOS </a>
+					</p>
+				</li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+		<div class="{% cycle '' 'barre_ clr' %}"></div>
+	{% endfor %}
+	<div class="clr"></div>
+<div class="barre_blanc"></div>
+{% endblock %}

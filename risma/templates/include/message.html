@@ -1,0 +1,20 @@
+{% if messages %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.message').animate({ opacity : 1 },5000, function(){
+			$('.message').fadeOut(500);	
+		})
+	})
+</script>
+	<div class="message">
+		<div class="container_12">
+			<ul class="block centerAuto alignCenter boxLi10">
+				{% for message in messages %}
+					<li class="{{message.tags}}"> {{ message }}</li>
+				{% endfor %}
+				
+				
+			</ul>
+		</div>
+	</div>
+{% endif %}

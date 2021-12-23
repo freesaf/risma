@@ -1,0 +1,90 @@
+{% load i18n %}
+{% load i18n thumbnail zinnia_tags recrutement_tags %}
+{% spaceless %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="icon" type="image/png" href="{{ MEDIA_URL }}images/favicon.png" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ MEDIA_URL }}images/favicon.ico" />
+	<title>{% block title %}RISMA{% endblock %}</title>
+	<meta name="google-site-verification" content="" />
+	<meta name="description" content="{% block description %}RISMA{% endblock %}" /> 
+	<meta name="keywords" content="{% block meta-keywords %}{% endblock %}" />
+	<link rel="image_src" href="{% block image_src %}http://{{ request.META.HTTP_HOST }}/site_media/images/logo2.png{% endblock %}" />
+	<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/utils.css">
+	<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/style.css">
+	<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/sous_menu.css">
+	<!--[if IE 7]>
+		<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/ie7.css">
+	<![endif]-->
+	{% block extrastyle %}{% endblock %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/carousel.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/navigation_menu.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var document_url = "/"+document.location.href.split('/')[3]+"/";
+			var document_url2 = "/"+document.location.href.split('/')[3]+"/"+document.location.href.split('/')[4]+"/";
+			
+			$(".sous_menu a[href='"+document_url+"']").addClass("active");
+			$(".sous_menu .active").parent().parent().parent().parent().addClass("active");
+			$("#menu > ul > li > a[href='"+document_url+"']").parent().addClass("active");
+			
+			
+			$("#menu > ul > li > a[href='"+document_url2+"']").parent().addClass("active");
+			
+			$(".haut > a").click(function() {
+				$('html, body').animate({  
+		            scrollTop:0 
+		        }, 'slow'); 
+				return false;
+			});
+		});
+	</script>
+	{% block extrahead %}{% endblock %}
+</head>
+<body {% block blur %}{% endblock%}>
+	<div id="back" class="absoluteLayout"></div>
+	<div id="conteneur" class="relativelayout">
+		{% include "include/message.html" %}
+		{% include "include/header.html" %}
+		{% block carousel %} {% endblock %}
+	    <div id="{% block bg_blanc %}bg_blanc{% endblock %}">
+	    	<div id="corps" class="container centerAuto {% block classes_corps %}{% endblock %}">
+				{% block top_corps %}{% endblock %}
+				{% block corps %}
+	    		<div id="{% block id_content %}content{% endblock %}" class="colonne">
+	    			{% block content %}{% endblock %}
+	    		</div><!-- content -->
+				<div id="side_bar" class="right">
+					{% block side_bar %}
+					{% block bloc1_side %}
+						{% get_recent_entries 3 "zinnia/tags/recent_entries2.html" %}
+					{% endblock %}
+					{% block bloc1_offre %}
+						{% comment %}<div>
+							<h1 class="bottom20 light uppercase top20 bleu">Dérniers offres</h1>
+							{% get_offres 3 %}
+						</div>
+						{% endcomment %}
+					{% endblock %}	
+					{% endblock %}
+				</div>
+				<div class="clr"></div>
+				{% endblock %}
+	    	</div><!-- corps -->
+	    </div><!-- bg_blanc -->
+		{% block cont_bas %}
+		<div id="bas_corps">
+			<div class="container centerAuto">
+				{% block bas_corps %}{% endblock %}
+			</div>
+		</div>
+		{% endblock %}
+		{% include "include/footer.html" %}
+	</div><!-- conteneur -->
+	{% include "include/ga.html" %}
+</body>
+</html>
+{% endspaceless %}

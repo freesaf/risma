@@ -1,0 +1,50 @@
+{% load flatpages_tags %}
+<ul class="horizontal blanc">
+	<li><a href="{% url index %}">Accueil</a></li>
+	<li class="prr"><a href="/presentation/">Qui sommes-nous ?</a>
+		<div class="sous_menu">
+			{% get_pagestatiques "qui sommes nous" %}	
+		</div>
+	</li>
+	<li class="prr"><a href="/directoire/">Organisation</a>
+		<div class="sous_menu">
+			{% get_pagestatiques "organisation" %}	
+		</div>
+	</li>
+	<li class="prr"><a href="/carte-des-implantations/">Stratégie</a>
+		<div class="sous_menu">
+			{% get_pagestatiques "strategie" %}
+		</div>
+	</li>
+	<li><a href="{% url offre_list %}">Carrière</a></li>
+	<li><a href="/investisseurs/">Investisseurs</a></li>
+	<li class=""><a href="{% url communique %}">Revue de presse</a></li>
+	<li class=""><a href="/bourse/graphe/">Risma en Bourse</a></li>
+	{% comment %}
+	<li class=""><a href="{% url communique %}">Presse</a></li>
+	<li class=""><a href="{% url news_list %}">News</a></li>
+	<li class=""><a href="{% url offre_list %}">Carrière</a></li>
+	<li class=""><a href="/investisseurs/">Investisseurs</a></li>
+	<!--<li class=""><a href="#">Pages statiques</a>
+		<div class="sous_menu">
+			<ul>						
+				{% get_pagestatiques "homepage" %}
+			</ul>
+		</div>
+	</li>-->
+	
+	<li class=""><a href="{% url contact %}">Contact</a></li>
+	<li class=""><a href="#">Bourse</a></li>{% endcomment %}
+</ul>
+<div class="clr"></div>
+<script type="text/javascript">
+	/*$(document).ready(function(){
+		$(".prr").hover(function(){
+			$(this).find(".sous_menu").slideDown(500);
+			
+		}, function(){
+			$(this).find(".sous_menu").slideUp(500);
+		});
+	});*/
+	
+</script>

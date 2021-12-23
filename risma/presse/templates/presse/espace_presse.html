@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load contentadmin_tags fichier_tags %}
+{% block title %}{% trans "Espace presse" %}{% endblock %}
+{% block content %}
+<h1 class="titre festival uppercase font23 bottom20">{% trans "Espace presse" %}</h1>
+<div class="article_news festival_">
+	
+	<h1 class="uppercase font23 bottom20 vert">— {% trans "accréditation" %}</h1>
+	{% load fichier_tags %}
+	
+	{% for fichier in fichiers %}
+		{% if fichier.fichier %}
+			<p class="vert_a">{{ fichier }} <a href="{{ fichier.fichier.url }}" class="uppercase" title="{{ fichier }}"> > télécharger</a></p>
+		{% endif %}
+	{% endfor %}
+	<div class="barre_blanc"></div>
+	
+	<h1 class="uppercase font23 bottom20 vert">— {% trans "Dossier de presse" %}</h1>
+	
+	{% for fichier in dossiers_presse %}
+		{% if fichier.fichier %}
+			<p class="vert_a">{{ fichier }} <a href="{{ fichier.fichier.url }}" class="uppercase" title="{{ fichier }}"> > télécharger</a></p>
+		{% endif %}
+	{% endfor %}	
+		
+	<div class="barre_blanc"></div>
+	<h1 class="uppercase font23 bottom20"><a class="vert" href="{% url communique %}">— {% trans "communiqué de presse" %}</a></h1>
+	{% for p in communique %}
+	 	<div class="revue">
+			{% comment %}<div class="photo_revue"><a href="{{ p.get_absolute_url }}"><img alt="{{ {{ p.titre }} }}" src="{% thumbnail p.media_photo 150x162 %}" /></a></div>{% endcomment %}
+			<div class="contenu_revue">
+				<h1 class="font15 uppercase"><a href="{{ p.get_absolute_url }}" title='{{ p.titre }}'>> {{ p.titre }} / {{ p.date }} {% if p.media %}- {{ p.media }} {% endif %}
+				{% if p.get_diffusion_display  %}({{ p.get_diffusion_display }}) {% endif %}</a></h1>
+				{{ p.extrait|truncatewords:40 }}
+				<p>
+					{% if p.fichier_ar %}{% trans "Télécharger le communiqué de presse en arabe " %} <a  class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier_ar }}" target="_blank" title='{% trans "Télécharger" %}'>>{% trans "Télécharger" %}</a>{% endif %}
+				</p>
+				<p class="top5">
+					{% if p.fichier %}{% trans "Télécharger le communiqué de presse en français" %} <a class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier }}" target="_blank" title='{% trans "Télécharger" %}'>>{% trans "Télécharger" %}</a>{% endif %}
+				</p>
+				
+				<p>
+					{% if p.fichier_en %}{% trans "Télécharger le communiqué de presse en anglais " %} <a  class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier_en }}" target="_blank" title='{% trans "Télécharger" %}'>>{% trans "Télécharger" %}</a>{% endif %}
+				</p>
+			</div>
+			{% if not forloop.last %}<div class="barre_"></div>{% endif %}
+			
+		</div>
+	{% endfor %}
+	<div class="clr"></div>
+	<div class="barre_blanc"></div>
+	<h1 class="uppercase font23 bottom20"><a class="vert" href="{% url presse %}">— {% trans "revue de presse" %}</a></h1>
+	{% for p in presse %}
+	<div class="revue">
+		{% comment %}<div class="photo_revue"><a href="{{ p.get_absolute_url }}"><img alt="{{ p.titre }}" src="{% thumbnail p.media_photo 150x162 %}" /></a></div>{% endcomment %}
+		<div class="contenu_revue">
+			<h1 class="font15 uppercase"><a href="{{ p.get_absolute_url }}">> {{ p.titre|truncatewords:5 }} - {{ p.media }} ({{ p.get_diffusion_display }}) / {{ p.date }}</a></h1>
+			{{ p.extrait|truncatewords:40 }}
+			<p class="top5">
+				<a href="{{ p.get_absolute_url }}" class="uppercase vert" title='{% trans "lire la suite" %}'>> {% trans "lire la suite" %}</a>
+			</p>
+		</div>
+		{% if not forloop.last %}<div class="barre_"></div>{% endif %}
+	</div>
+	{% endfor %}
+	<div class="barre_blanc"></div>
+	<h1 class="uppercase font23 bottom20"><a class="vert" href="{% url communique_auth %}" title='{% trans "Espace sécurisé" %}'>— {% trans "Espace sécurisé" %}</a></h1>
+	<div class="barre_blanc"></div>
+</div>
+{% endblock %}

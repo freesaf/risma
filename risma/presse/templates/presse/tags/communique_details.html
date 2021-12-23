@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block title %}  {{ presse.titre }} {% endblock %}
+{% block description %}{{ presse.description|safe|truncatewords:30 }}{% endblock %}
+{% block content %}
+<h1 class="titre festival uppercase font23 bottom20">{{ presse.titre }} - {{ presse.date }}</h1>
+<div class="article_news festival_">
+	<p class="photo_news colonne"> <img src="{% thumbnail presse.media_photo 288x156 crop %}" alt="{{ presse.titre }}" /></p>
+	{{ presse.description|safe }}
+	{% if presse.lien %}<p class="top10"> <a class="vert uppercase" href="{{ presse.lien }}" target="_blank">>{% trans "voir l'article" %}</a></p>{% endif %} 
+		<p class="top15">
+			<a class="uppercase font15 vert" href="{{ MEDIA_URL }}{{ presse.fichier }}" target="_blank">
+				>{% trans "Télécharger le communiqué (Fr)" %} 
+			</a>
+		</p>
+		{% if presse.fichier_ar %}<p class="telecharger_pdf"><a class="uppercase font15 vert" href="{{ MEDIA_URL }}{{ presse.fichier_ar }}" target="_blank" title='{% trans "Télécharger le communique (Ar)" %}'>>{% trans "Télécharger le communique (Ar)" %}</a></p>{% endif %}
+		{% if presse.fichier_en %}<p class="telecharger_pdf"><a class="uppercase font15 vert" href="{{ MEDIA_URL }}{{ presse.fichier_en }}" target="_blank" title='{% trans "Télécharger le communique (En)" %}'>>{% trans "Télécharger le communique (En)" %}</a></p>{% endif %}
+	<div class="clr"></div>
+</div>
+<div class="barre_blanc"></div>
+<span id="retour"><a href="{% url communique %}" class="vert uppercase" title='{% trans "Retour" %}'>>{% trans "Retour" %}</a></span>
+{% endblock %}

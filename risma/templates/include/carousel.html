@@ -1,0 +1,14 @@
+{% load carousel %}
+{% comment %}
+<div id="cont_carousel">
+
+	<div class="clr"></div>
+</div><!-- cont_carousel -->
+{% endcomment %}
+<div id="carousel" class="centerAuto">
+	{% carousel "slider" "carousel_full" "1280x900" "carousel_2" %} 
+</div>
+<div id="plus_info" class="container centerAuto relativeLayout">
+	<a class="block right" href="#content"><img src="{{ MEDIA_URL }}images/plus_infos.jpg" alt="plus d'infos" /></a>
+	<div class="clr"></div>
+</div>

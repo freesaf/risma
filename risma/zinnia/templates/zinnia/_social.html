@@ -1,0 +1,24 @@
+{% load disqus_tags %}
+<div class="block_partage_news">
+	<div class="icons_partage addthis_toolbox addthis_default_style " 
+			addthis:url="{{ object.get_absolute_url }}" 
+			addthis:title="{{ object.title }}" 
+			addthis:description="{{ object.excerpt|truncatewords:10 }}"
+			addthis:image="{{ object.contenu_media1.miniature.url }}">
+		<ul class="horizontal partage_liste">	
+				<li class="partage_fb">
+					<a href="http://www.facebook.com/sharer.php?u=http://{{ request.META.HTTP_HOST }}{{ object.get_absolute_url }}">
+						<img src="http://www.crumiere.net/image/icone_reseau_facebook.png" />
+					</a>
+				</li>
+			<!--<li class="like_fb">
+				<a class="addthis_button_facebook_like" 
+					fb:like:layout="button_count" 
+					fb:image="{{ object.contenu_media1.miniature }}"></a>
+			</li>-->
+			<li class="tweet_tw"><a class="addthis_button_tweet" tw:via="" tw:related=""></a></li>
+			<!--<li class="right"><a href="{{ object.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/lirePlus.jpg" alt="" /></a></li>-->
+		</ul>
+		<div class="clr"></div>
+	</div><!-- icons partage -->
+</div><!-- block icons partage -->

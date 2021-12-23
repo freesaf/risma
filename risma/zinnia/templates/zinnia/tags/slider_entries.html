@@ -1,0 +1,43 @@
+{% load i18n thumbnail %}
+{% if entries %}
+<div id="cont_carousel">
+	<div id="prev_carousel" class="prev_carousel"></div>
+    <div id="next_carousel" class="next_carousel"></div>
+	<div id="carousel">
+		<ul>
+			{% for object in entries %}
+						  {% with object.html_content|truncatewords_html:100|safe as object_content %}  
+						  	<li><a href="{{ object.get_absolute_url }}" title="{{ object.title }}"><img src="{% thumbnail object.contenu_media1.miniature 566x210 crop %}" alt="{{ object.title }}" /></a></li>	  
+						  {% endwith %}
+						{% empty %}
+						  <p class="notice">{% trans "No entries yet." %}</p>
+				{% endfor %}	
+		</ul>
+		<div class="clr"></div>
+	</div>
+	
+<div id="navigation_carousel" class="navigation"></div>
+	<div id="description_carousel"></div>
+	<div class="clr"></div>
+</div><!-- cont carousel -->
+<script type="text/javascript">
+	var caroussel;
+ $(document).ready(function(){
+		 caroussel = new Ncarousel({ parent: "carousel"  ,
+		 type_alignement:"horizontal" , effet : "slide"  , auto_start : 1 ,  auto_play : true , ratio_autoplay : 2.5, reportoire_media : "/site_media/"
+		  ,delay : 1500 , type_navigation : "cercle" });
+		  
+	});
+	function actif(debug) {
+		console.log('actif fn');
+		if(!debug) {
+			caroussel.pausing_click(caroussel.play_parent); 
+			window.onfocus = function(){
+				caroussel.playing_click(caroussel.play_parent);
+			}
+		}
+	}
+	
+</script>
+{% endif %}
+

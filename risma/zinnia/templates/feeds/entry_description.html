@@ -1,0 +1,9 @@
+{% load thumbnail %}
+
+{% autoescape off %}
+	{% if obj.contenu_media1 %}
+			
+	{% endif %}
+	{{ obj.html_content|striptags|truncatewords:100 }}
+{% endautoescape %}
+<a href="{{ obj.link }}" title="{{ obj.title }}">Lire la suite</a>

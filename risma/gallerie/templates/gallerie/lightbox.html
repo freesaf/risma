@@ -1,0 +1,12 @@
+{% load thumbnail %}
+<div id="{{ div_id }}" class="">
+	<ul class="horizontal">
+	{% for photo in photos %}
+		<li><a href="#" rel="{% thumbnail photo.photo 800x700 crop %}" title="{{ photo.titre }}"><img src="{% thumbnail photo.photo taille crop %}" alt="{{ photo.titre }}" /></a></li>
+	{% endfor %} 
+	</ul>
+	<div class="clr"></div>
+</div>
+<script type="text/javascript">
+	var lightbox_{{ div_id }} = new LightBox({ parent: "{{ div_id }}"});
+</script>

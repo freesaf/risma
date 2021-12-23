@@ -1,0 +1,24 @@
+{% load thumbnail %}
+<div id="{{ div_id }}" class="">
+	{% comment %}<div id="prev_{{ div_id }}" class="prev_carousel"></div>
+	<div id="next_{{ div_id }}" class="next_carousel"></div>  {% endcomment %}
+	<ul>
+	{% for photo in photos %}
+		<li><img src="{% thumbnail photo.photo taille crop %}" alt="{{ photo.titre }}" /></li>
+	{% endfor %} 
+	</ul>
+</div>
+<div id="description_{{ div_id }}" class="description_diaporama"></div>
+<div id="navigation_{{ div_id }}" class="horizontal">
+	<div id="cercles_{{ div_id }}">
+	 	<ul class="horizontal">
+	    </ul>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div><!-- navigation-->
+<div class="clr"></div>
+{% comment %}{% endcomment %}
+<script type="text/javascript">
+var carousel = new Ncarousel({ parent: "{{ div_id }}", effet : "fade" });
+</script>

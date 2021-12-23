@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n thumbnail zinnia_tags %}
+{% load contentadmin_tags %}
+{% block title %}page{% endblock %}
+{% block content %}
+<div class="titre_page blanc"><h1>page</h1></div>
+<div id="cont_page">
+	<div id="cont_bg">
+		<div class="photo_page colonne alignCenter">
+			<img src="{{ MEDIA_URL }}images/photo.jpg" alt="Photo" />
+		</div>
+		<div class="content_page">
+			{% blocktext page text_page "texte de page page" %}
+			<h1>cvSearch, un cabinet de recrutement de talents</h1>
+			<p>
+				Fort de son expérience dans des environnements socioculturels différents et grâce
+				à son organisation régionale et internationale (Casablanca, Rabat, Paris et Tanger),
+				le cabinet de recrutement spécialisé cvSearch s’adapte à chacun de ses clients en
+				prenant en compte leurs spécificités et leur culture.
+			</p>
+			<p>
+				Nous avons fait le choix d’être au plus proche de nos clients et de les accompagner
+				dans leurs challenges au quotidien.
+			</p>
+			<p>
+				Nos domaines de spécialisation
+			</p>
+			{% endblocktext %}
+		</div>
+		<div class="clr"></div>
+	</div>
+</div><!-- cont_pagel -->
+{% endblock %}
+{% block side_bar %}{% get_recent_entries 2 %}{% endblock %}
+
+

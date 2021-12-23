@@ -1,0 +1,18 @@
+{% load i18n thumbnail %}
+<div id="block_artilces_populaire">
+	{% for entry in entries %}
+	<div class="resume_article">
+		<ul class="horizontal">
+			<li class="photo_recent_article"><img src="{% thumbnail entry.contenu_media1.miniature 100x100 crop %}" alt="{{ entry.title }}" /></li>
+			<li class="txt_recent_article">
+				<h2><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">{{ entry.title|truncatewords:4 }}</a></h2>
+				<p>par <span class="vert">{{ entry.authors.all|first  }}</span> dans <span class="vert">{{ entry.categories.all|first  }}</span></p>
+				<span class="block alignRight"><a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">Lire plus >>></a></span>
+			</li>
+		</ul>
+		<div class="clr"></div>
+	</div><!-- resume article -->
+	{% empty %}
+			<h1>{% trans "No entries yet." %}</h1>
+	{% endfor %}
+</div>

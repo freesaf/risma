@@ -1,0 +1,87 @@
+/*
+ * carousel
+ */
+#cont_carousel {
+	padding-left : 22px;
+}
+#carousel, #carousel li {
+	width : 602px;
+	height:367px;
+}
+#carousel {
+	position:relative;
+	overflow :hidden;
+}
+#carousel li {
+	text-align  : center;
+	float:left;
+}
+.images_carousel{
+	position:relative;
+	height:367px;
+}
+.description_carousel {
+	width : 489px;
+	height : 33px;
+	color : #fff;
+	padding : 20px 17px;
+	background : url("../images/transBleu.png");
+	position:absolute;
+	z-index : 20;
+	left : 38px;
+	bottom : 12px;
+}
+.next_carousel, .prev_carousel {
+	width:36px;
+	height : 54px;
+	position:absolute;
+	cursor : pointer;
+	z-index:20;
+	margin-top : 154px;
+}
+.next_carousel {
+	background : url("../images/next_carousel.png") no-repeat;
+	right : 10px;
+}
+.prev_carousel {
+	background : url("../images/prev_carousel.png") no-repeat;
+	left : 10px;
+}
+#navigation_carousel {
+	width : 200px;
+	height:30px;
+	position:absolute;
+	right : 10px;
+	margin-top : 272px;
+	z-index:20;
+}
+#navigation_carousel .elem_active {
+	color : #d49a30;
+}
+#navigation_carousel li {
+	padding :0 10px;
+	float:left;
+	/*cursor : pointer;*/
+}
+#navigation_carousel li+li {
+	border-left : #000 solid 1px;
+}
+/*
+ * Diaporama
+ */
+#cont_diaporama {
+	width : 602px;
+}
+#diaporama {
+	position : relative;
+	overflow : hidden;
+}
+.description_diaporama {
+	height : 40px;
+	padding : 20px;
+	background : url("../images/transBleu.png");
+	color : #fff;
+}
+#navigation_diaporama {
+	height : 20px;
+}

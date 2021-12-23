@@ -1,0 +1,13 @@
+{% load i18n %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language as LANGUAGE_CODE %}
+<form action="/i18n/setlang/" method="post">
+	{% csrf_token %}
+	<input name="next" type="hidden" />
+	<select name="language">			
+	{% for language in LANGUAGES %}
+		<option value="{{ language.0 }}" {% if LANGUAGE_CODE == language.0 %} selected{% endif %}>{{ language.1 }}</option>
+	{% endfor %}
+	</select>
+	<input type="submit" value="Go" />
+</form>

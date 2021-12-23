@@ -1,0 +1,4 @@
+<li>
+	<h1 class="top15"><a href="{{ n.get_absolute_url }}">{{ n.titre }}</a></h1>
+	{{ n.contenu|truncatewords_html:20|safe }}
+</li>

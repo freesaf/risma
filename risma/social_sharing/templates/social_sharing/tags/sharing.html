@@ -1,0 +1,38 @@
+
+<!-- themes possible pour les boutons:
+		hcount
+		large
+		vcount
+!-->
+	<!-- icone share this <span class='st_sharethis_large' displayText='ShareThis'></span> !-->
+	{% if fb_share %}
+		<li>
+			 <span class='st_facebook_{{theme}}' displayText='Facebook'  st_url="{{url}}" st_title="{{title}}" st_image="{{image}}" st_summary="{{description}}" ></span>
+		</li>
+	{% endif %}
+	{% if tw %}
+		<li class="tweet_tw">
+			<span class='st_twitter_{{theme}}' displayText='Tweet'  st_url="{{url}}" st_title="{{title}}" st_image="{{image}}" st_summary="{{description}}" st_via="WBC_ma"></span>
+		</li>
+	{% endif %}
+	{% if gplus %}
+ 		<li class="add_gp">
+ 			<span class='st_googleplus_{{theme}}' displayText='Google +'  st_url="{{url}}" st_title="{{title}}" st_image="{{image}}" st_summary="{{description}}"></span>
+		</li>
+	{% endif %}
+	{% if fb_like %}
+		<li class="like_fb">
+			<span class='st_fblike_{{theme}}' displayText='Facebook Like'  st_url="{{url}}" st_title="{{title}}" st_image="{{image}}" st_summary="{{description}}"></span>
+		</li>
+	{% endif %}
+	{% if email %}
+		<li class="email">
+			<span class='st_email_{{theme}}' displayText='Email'  st_url="{{url}}" st_title="{{title}}" st_image="{{image}}" st_summary="{{description}}"></span>
+		</li>
+	{% endif %}
+	</ul>
+	<div class="clr"></div>
+</div> 
+
+
+

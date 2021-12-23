@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n thumbnail zinnia_tags  %}
+{% block extrahead %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		var hauteur_window = $("#back").height();
+		var height_carousel = hauteur_window - 92;
+		$("#carousel").height(height_carousel);
+		
+		$(".cercle").click(function(){
+			var index = $("#navigation_slider_actus").find("li").index(this);
+			$("#navigation_slider_actus").find("li").children("img").attr("src", "/site_media/images/cercle.png");
+			$(this).children("img").attr("src", "/site_media/images/cercle_active.png");
+			$(".images_slider_actus").animate({ left : -590*index }, 500);
+			
+		});
+		    $('a[href^="#"]').click(function(){  
+		        var the_id = $(this).attr("href");  
+		        $('html, body').animate({  
+		            scrollTop:hauteur_window 
+		        }, 'slow');  
+		        return false;  
+		    });              
+	});
+</script>
+<!--<script>
+   	$(document).ready(function(){
+   			$('.overlay').animate({opacity: "0.8"}, 800);
+    	    $('.pop-up').animate({top: "150px"}, 1000);
+		$('.close').click(function(){ 
+		   	$('.pop-up').hide().stop(); 
+    		$('.overlay').hide().stop();
+    		return false;
+		});	
+    });
+</script>
+<div class="overlay"></div>
+<div class="pop-up absoluteLayout">
+	<a href="" class="close right"><img src="{{ MEDIA_URL }}images/close.png" alt=""></a>
+	<iframe src="https://player.vimeo.com/video/124625162" width="585" height="385" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>-->
+{% endblock %}
+{% block blur %}onblur="desactive();" onfocus="active();"{% endblock%}
+{% block carousel %}{% include "include/carousel.html" %} 
+{% endblock %}
+{% block id_content %}content2{% endblock %}
+{% block content %}
+{% get_recent_entries 3 %}
+{% endblock %}
+{% block side_bar %}
+<div class="widget_home">
+	<a href="{% url offre_list %}"><img src="{{ MEDIA_URL }}images/widget_rejoindre.png" /></a>
+</div>
+<div class="widget_home top20">
+	<a href="/investisseurs/"><img src="{{ MEDIA_URL }}images/widget_investi.png" /></a>
+</div>	
+{% endblock %}
+{% block cont_bas %}{% endblock %}

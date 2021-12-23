@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n thumbnail pagination_tags%}
+{% load  flatpages_tags %}
+{% block title %}{{ hotel.nom }}{% endblock %}
+{% block description %}{{ hotel.description|striptags|truncatewords_html:25|safe }}{% endblock %}
+
+{% block titre_page %}{{ hotel.nom }}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/strategie.png" />
+</div>
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}top30 borderBottom{% endblock %}
+
+{% block corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	{% get_pagestatiques "strategie" %}
+	<div class="clr"></div>
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="top30">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> Stratégie </a> > <a href="#" class="bleu"> {{ hotel.nom }}</a>
+	</div>
+	<h1 class="uppercase light top20">{{ hotel.nom }}</h1>
+</div> <!-- bloc_titre_page -->
+<div id="contenu_page" class="top30">
+	   {% if hotel.logo %}
+		<div class="alignCenter bottom20">	
+			<img class="" src="{% thumbnail hotel.logo 800x400 crop %}" />
+		</div>
+	{% endif %}
+	   {{ hotel.description|safe }}
+	
+	<div class="clr"></div>
+	
+	
+	
+	<h2 class="top20">Gallerie</h2>
+	<div id="gallerie">
+		{% load carousel %}
+	  	{% carousel hotel.galerie.slug hotel.galerie.titre 300x225 "galerie" %}
+	</div>
+	  
+	
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = document.location.href;
+		var index_url = "/"+url.split('/')[3]+"/";
+		$('#sous_menu_page a[href="'+index_url+'"]').addClass('current_page_item');
+		$(".current_page_item").parent().addClass("active");
+	});
+	
+	
+</script>
+
+
+
+{% endblock %}
+
+{% block bas_corps %}{% endblock %}
+

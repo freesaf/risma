@@ -1,0 +1,11 @@
+{% for offre in offres %}
+	<div class="offre_wgt">
+		<h3 class="bottom5"><a class="bleu" href="{% url offre_detail offre.id %}">{{offre.nomposte}} </a></h3>
+		<ul class="horizontal">
+			<li class="titre_offre_tag">{{ offre.date_de_cloture }} - {{offre.localisation|safe }}</li>
+			<li class="lien_offre_tag top5 right"><a href="{% url offre_detail offre.id %}" class="btn">lire la suite</a></li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	
+{% endfor%}

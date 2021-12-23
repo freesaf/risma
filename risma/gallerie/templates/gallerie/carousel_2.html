@@ -1,0 +1,134 @@
+{% load thumbnail %}
+<div id="{{ div_id }}" class="">
+	<div id="prev_{{ div_id }} none" class="prev_carousel"></div>
+	<div id="next_{{ div_id }} none" class="next_carousel"></div> 
+	<div id="description_{{ div_id }}" class="description_carousel none"></div>
+	<ul>
+	{% for photo in photos %}
+		<li class="slide_full absoluteLayout">
+			<div class="titre_image absoluteLayout {% if forloop.counter > 1 %}txtcentre2{% endif %}">{{ photo.titre|safe }}</div>
+			<img src="{% thumbnail photo.photo taille crop %}" alt="{{ photo.titre }}" /></li>
+	{% endfor %} 
+	</ul>
+	<div class="clr"></div>
+</div>
+{% comment %}
+<div id="navigation_{{ div_id }}">
+	<div id="cercles_{{ div_id }}">
+	 	<ul>
+	    </ul>
+	</div>
+    <div class="player_{{ div_id }}" id="player_{{ div_id }}">
+     <ul>
+     </ul>
+     <div class="clr"></div>
+    </div><!-- player_carousel -->
+</div><!-- navigation-->
+{% endcomment %}
+<script type="text/javascript">
+$(".slide_full").eq(0).addClass("slide_active");	
+var array_images = [];
+var loaded = [];
+{% for photo in photos %}
+	array_images.push("{% thumbnail photo.photo taille crop %}");
+{% endfor %}
+activeLoader();
+function activeLoader() {
+	for( var i=0;i< array_images.length;i++) {
+			loader(array_images[i]);
+	}
+}
+function loader(url) {
+	var img = new Image();
+	img.onload = function() {
+		loaded.push('ok');
+		if( loaded.length ==  array_images.length) {
+			init();
+            auto_play(autoPlay);
+		}
+	}
+    img.src=url;
+}
+var nombre_slide = $(".slide_full").length;
+var pas_full = $(".slide_full").eq(0).width();
+var autoPlay = true;
+var current = 0;
+var timer;
+function init() {
+	for( var i=1;i<nombre_slide;i++ ) {
+		$(".slide_full").eq(i).css("left" , pas_full);
+	}
+}
+function init2() {
+	$(".slide_full").eq(1).animate({ left : 0}, 700);
+		$(".slide_full").eq(2).animate({ left : pas_full}, 1000, function(){
+			var t = setTimeout( function() { $(".slide_full").eq(1).animate({ left : pas_full}, 1000); clearTimeout(timer); auto_play(autoPlay); },5000 )
+		});
+}
+function desactive (){
+	//console.log("desactive");
+	autoPlay = false;
+	auto_play(autoPlay);
+}
+function active (){
+	//console.log("Active");
+	autoPlay = true;
+	auto_play(autoPlay);
+}
+//init();
+//auto_play(autoPlay);
+function auto_play(auto) {
+     if(auto){
+		timer = window.setTimeout(timing,5000);
+		//clearTimeout(timer);
+	 }
+     else {
+    	 clearTimeout(timer);
+     }
+ }
+ function timing() {
+ 	clearTimeout(timer);
+ 	if(current < nombre_slide) {
+		if(current == 0) {
+			//init2();
+		}
+		current++;	
+		$(".slide_full").removeClass("slide_active");
+		$(".slide_full").eq(current).addClass("slide_active");	
+		$(".slide_full").eq(current).animate({ left : 0 }, 1000);
+		if( current < nombre_slide && current > 1) {
+			$(".slide_full").eq(current-1).animate({ left : -200 }, 1000);
+		}
+		else{
+			//$(".slide_full").eq(0).css("left",pas_full);
+		}
+		$(".slide_full").eq(current).css("left",pas_full);
+		auto_play(autoPlay);
+	}
+	else {
+		clearTimeout(timer);
+		current = -1;
+		init2();
+		//auto_play(autoPlay);
+		
+		/*for( var j=0;j<nombre_slide-2;j++ ) {
+			console.log($(".slide_full").eq(j));
+			$(".slide_full").eq(j).css("left" , pas_full);
+		}
+		$(".slide_full").eq(nombre_slide-1).animate( {left : 0},1500);
+		current = -1;
+		auto_play(autoPlay);
+		
+		, function() {
+			
+			/*if ( current < nombre_slide-1) {
+				$(".slide_full").eq(nombre_slide-1).css( "left" , pas_full);	
+			}
+			if( current == nombre_slide  ) {
+				$(".slide_full").eq(nombre_slide-1).css( "left" , -420);	
+			}
+		}
+		*/
+	}	
+ }
+</script>

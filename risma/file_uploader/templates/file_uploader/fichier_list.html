@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load zinnia_tags fichier_tags %}
+
+{% block title %}Documents{% endblock %}
+{% block content %}
+	{% for f in object_list %}
+	{% ifchanged f.categorie %} <div class="espace_blanc jaune bottom10"><h1><a href="{{ f.categorie.get_absolute_url }}" class="jaune">{{ f.categorie }}</a></h1></div>{% endifchanged %}
+		<div class="document_list box15 bottom5">
+				<ul class="horizontal">
+					{% if f.image %}
+						<li class="photo_doc"><a href="{% url fichier:download f.pk %}"><img src="{% thumbnail f.image 100x75 crop %}" alt="{{ f }}" /></a></li>
+					{% endif %}
+					<li class="text_doc">
+						<h3 class="bottom5"><a class="vert" href="{% url fichier:download f.pk %}" title="{{ f }}">{{ f }}</a> - <span class="gris bottom5">{{ f.date }}</span></h3>
+						
+						<p>{{ f.description|truncatewords:10 }}</p>
+						<div class="">
+							<a class="btn" href="{% url fichier:download f.pk %}" title="{{ f }}">Télécharger </a>
+						</div>
+					</li>
+				</ul>
+				<div class="clr"></div>
+			</div>
+	{% endfor %}
+{% endblock %}

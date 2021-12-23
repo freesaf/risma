@@ -1,0 +1,12 @@
+@media screen and (max-width: 960px) {
+	#conteneur {
+		width : 100%;
+	}
+	#content {
+		width : 100%;
+	}
+	#side_bar {
+		width : 100%;
+	}
+	
+}

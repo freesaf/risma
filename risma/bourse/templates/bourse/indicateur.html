@@ -1,0 +1,9 @@
+
+
+{% for n in indicateur %}
+<div id="cours" class="{{ n.curseur }} colonne"><a href="http://www.casablanca-bourse.com/bourseweb/Societe-Cote.aspx?codeValeur=8700" target="_blank" class="bleu"> {{ n.date }}  {{ n.isin }}  <span>  {{ n.market_center }} </span></a></div>	
+<span class="block right" id="right_bourse"> {{ n.variation }} <br />
+<a href="http://www.casablanca-bourse.com/bourseweb/Societe-Cote.aspx?codeValeur=8700" target="_blank" class="bleu"> {{ n.last_quote }} {{ n.currency }}   </a></span>
+<div class="clr"></div>
+{% endfor %}
+

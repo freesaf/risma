@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}RISMA en Bourse{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/highstock.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		//var data = [ [ 1180396800000, 125, 135, 70, 60, 237 ] ];
+		var seriesOptions = [],
+		yAxisOptions = [],
+		seriesCounter = 0;
+		var type_graphe = [ 'spline' , 'column' ];//, 'column'  , 'area' , 'areaspline'
+		
+		var dernier_table = [];
+		var date_table = [];
+		var volume_table = [];
+		{% for c in cours %}
+			var dernier_val = "{{ c.dernier }}";
+			var volume_val = "{{ c.volume }}";
+			dernier_val = dernier_val.replace("," , ".");
+			volume_val = volume_val.replace("," , ".");
+			dernier_table.push(dernier_val);
+			date_table.push(parseInt({{ c.date|date:"U" }})*1000);
+			volume_table.push(volume_val);
+		{% endfor %}
+        
+		var table_length = dernier_table.length;
+		var dernier = [];
+		var volume = [];
+		for( var i = 0; i < table_length; i++ ) {
+			dernier.push([ date_table[i], parseFloat(dernier_table[i])] );
+			volume.push([ date_table[i], parseFloat(volume_table[i])] );
+		}
+	tout();
+	function tout() {
+		names = ['deriner', 'volume'],
+		colors = Highcharts.getOptions().colors;
+		var column_volume = {
+			type:'column',
+            yAxis:1,
+            data:volume
+		};
+		var series = [{
+            name: 'Dernier',
+            data: dernier
+        }];
+
+        var line_data = {
+			name : 'volume',
+            type:'column',
+            yAxis:1,
+            data:volume
+        };
+		series.push(line_data);
+		
+		$('#graph').highcharts('StockChart', {
+            chart: {
+                type: 'spline',
+                renderTo: 'graph',
+                zoomType: 'x',
+				alignTicks: false
+            },
+			credits: {
+		      enabled: false
+		  },
+            plotOptions: {
+                area: {
+                    stacking: 'normal'
+                }
+            },
+            rangeSelector: {
+                inputEnabled: $('#graph').width() > 480,
+		        selected: 4
+            },
+
+            title: {
+                text: 'RISMA en Bourse'
+            },
+
+            yAxis: [{
+                title: {
+                    text: 'Dernier'
+                },
+                height: 200,
+                lineWidth: 2
+            }, {
+                title: {
+                    text: 'Volume'
+                },
+                top: 300,
+                height: 200,
+                offset: 0,
+                lineWidth: 2
+            }],
+            series: series
+        });
+	}
+	
+
+		
+	});
+</script>
+{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/strategie.png" />
+</div>
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}top30 borderBottom{% endblock %}
+{% block corps %}
+
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	<div class="clr"></div>
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="top30">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> RISMA en Bourse </a>
+	</div>
+	<h1 class="uppercase light top20">RISMA en Bourse</h1>
+</div> <!-- bloc_titre_page -->
+<div id="contenu_page" class="top30">
+<div id="graph"></div>
+</div>
+{% comment %}
+{% for c in cours %}
+    [
+        {{ c.date|date:"U" }},
+	    premier:    {{ c.premier }},
+        dernier:    {{ c.dernier }},
+        plus_haut:  {{ c.plus_haut }},
+        plus_bas:   {{ c.plus_bas }},
+        volume:     {{ c.volume }}
+    ]{% if not forloop.last %},{% endif %}
+{% endfor %}
+{% endcomment %}
+{% endblock %}

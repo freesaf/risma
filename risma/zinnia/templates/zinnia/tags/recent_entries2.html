@@ -1,0 +1,27 @@
+{% load i18n thumbnail %}
+<h1 class="bottom20 light uppercase bleu">Actualités</h1>
+<div id="cont_actus" class="relativeLayout">
+	<ul class="horizontal">
+  {% for entry in entries %}
+  	{% with entry.categories.all as categories %}
+		<li class="actu_">
+			<ul class="horizontal">
+				<li class="thumb_actu_">
+					<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark"><img src="{% thumbnail entry.contenu_media1.miniature 76x95 crop %}" /></a>
+				</li>
+				<li class="txt_actu_">
+					<h2 class="bleu bottom10"><a href="{{ entry.get_absolute_url }}" class="bleu">{{ entry.title }}</a></h2>
+					<span class="block bold">{{ entry.creation_date|date:"d F Y" }}</span>
+				</li>
+			</ul>
+			<div class="clr"></div>	
+		</li>
+	{% endwith %}
+  {% empty %}
+	  <p>
+	    {% trans "No entries yet." %}
+	  </p>
+  {% endfor %}
+  </ul>
+  <div class="clr"></div>
+ </div>

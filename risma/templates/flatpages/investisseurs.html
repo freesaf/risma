@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load i18n thumbnail fichier_tags zinnia_tags recrutement_tags %}
+{% load  flatpages_tags %}
+{% block title %}{{ flatpage.title }} {% endblock %}
+
+{% block description %}
+	{{ flatpage.content|striptags|truncatewords:30|safe }}
+{% endblock %}
+
+{% if flatpage.image %}
+
+{% block image_src %}
+	http://{{ request.META.HTTP_HOST }}{% thumbnail flatpage.image 180x180 crop %}
+{% endblock %}
+
+{% block meta-keywords %}{{ flatpage.mot_cle}}{% endblock %}
+{% endif %}
+
+{% block titre_page %}{{ flatpage.title }}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/investisseurs.png" />
+</div>
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block top_corps %}
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="/investisseurs/"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="/investisseurs/" class="bleu"> investisseurs </a>
+	</div>
+	<h1 class="uppercase light top20">{{ flatpage.title }}</h1>
+</div> <!-- bloc_titre_page -->
+
+{% endblock %}
+{% block corps %}
+<div id="contenu_page" class="top30">
+	<div id="" class="content colonne">
+		{% if flatpage.image %}
+	   <img class="colonne" src="{% thumbnail flatpage.image 313x268 crop %}" />
+	   {% endif %}
+	   {% comment %}
+	    {{ flatpage.content|safe }}
+	   {% endcomment %}
+		<div class="clr"></div>
+		<div class="top30">
+		{% get_file_by_cat "investisseurs"%}
+		</div>
+	</div>
+	<div id="side" class="right">
+		{% get_recent_entries 3 "zinnia/tags/recent_entries2.html" %}
+
+	
+	</div>
+	<div class="clr"></div>
+	
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = document.location.href;
+		var index_url = "/"+url.split('/')[3]+"/";
+		$('#sous_menu_page a[href="'+index_url+'"]').addClass('current_page_item');
+		$(".current_page_item").parent().addClass("active");
+	});
+</script>
+
+
+
+{% endblock %}
+{% block side_bar %}{% endblock %}
+{% block bas_corps %}
+{% include "include/bas_corps.html" %}
+{% endblock %}
+{% comment %}
+{% block content %}
+		<div class="article">
+			{% if flatpage.image %}
+				<p class="photo_article colonne"><span class="block absoluteLayout alignCenter">{{ flatpage.title }}</span>
+			{% endif %}
+			
+		<div class="clr"></div>
+		</div>	
+		
+------------
+{% for r in random %}
+	{{ r.title }} <br> 
+{% endfor %}
+
+{{r}}
+
+-------------
+
+
+
+{% endblock %} <!-- fin de block contenuCentre -->
+{% endcomment %}

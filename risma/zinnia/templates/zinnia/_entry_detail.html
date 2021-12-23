@@ -1,0 +1,46 @@
+{% load tagging_tags i18n disqus_tags thumbnail %}
+{% load zinnia_tags %}
+
+<div id="contenu_article">
+		 {% with object.contenu_media1 as media_principal %}
+			  {% if media_principal %}
+				  	{% if media_principal.type_media == 'image' %}
+					<p class="alignCenter">
+				  	  <img src="{% thumbnail media_principal.miniature 490x290 %}" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+					</p>
+				  	{% else %}
+					<p class="alignCenter">
+				  		{{ media_principal.contenu|safe }}
+					</p>
+				  	{% endif %}
+			  {% endif %}<!-- media principal -->
+		  {% endwith %}
+		  {{ object_content }}
+		  {% with object.contenu_media2 as media_principal %}
+			  {% if media_principal %}
+				  	{% if media_principal.type_media == 'image' %}
+					<p class="alignCenter">
+				  	  <img src="{% thumbnail media_principal.miniature 490x290 %}" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+					</p>
+				  	{% else %}
+					<p class="alignCenter">
+				  		{{ media_principal.contenu|safe }}
+					</p>
+				  	{% endif %}
+			  {% endif %}<!-- media principal -->
+		  {% endwith %}			  
+		  {% for media in object.contenumedia_set.all %}
+		  {% with media.type_media as type_media %}
+		        {% if type_media == 'image' %}
+		          <img src="{{ media.miniature.url }}" alt="{{ media.titre }}"
+		                   title="{{ media.titre }}" /><br />
+		        {% else %}
+		                <img src="{{ media.miniature.url }}" />
+		                {{ media.contenu|safe }}
+		        {% endif %}
+		  {% endwith %}<br /><br />
+			 {% endfor %}
+			
+		
+</div> <!-- contenu news -->
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebbbd3008659889"></script>

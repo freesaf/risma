@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n thumbnail zinnia_tags  %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/carriere.png" />
+</div>
+{% endblock %}
+{% block top_corps %}
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="{% url offre_list %}" class="gris"> Carrière </a> > <a href="{% url offre_list %}" class="bleu"> {{offre.nomposte|safe}} </a>
+	</div>
+<h1 class="bleu light top20 bottom5">{{offre.nomposte|safe}}</h1>
+
+<span class="block">{{ offre.date_de_cloture }} - {{offre.localisation|safe }}</span>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+{% block corps %}
+
+<div id="contenu_page" class="top30">
+	<div class="entite_offre">
+		<ul class="horizontal">
+			<li class="titre_entite">Référence</li>
+			<li>{{offre.ref}}</li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="entite_offre">
+		<ul class="horizontal">
+			<li class="titre_entite">Secteur d'activité</li>
+			<li>{{offre.secteur_dactivite}}</li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="entite_offre">
+		<ul class="horizontal">
+			<li class="titre_entite">Poste</li>
+			<li>{{offre.mission|safe}} </li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="entite_offre">
+		<ul class="horizontal">
+			<li class="titre_entite">Profil</li>
+			<li>{{offre.profil|safe}} </li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	<div class="top15 alignRight bottom15"><a class="btn2" href="{% url recrute offre.id %}">POSTULER</a></div>
+</div><!-- cont_article -->
+{% endblock %}
+{% block side_bar %}{% endblock %}
+{% block bloc1_side %}
+{% endblock %}
+{% block cont_bas %}{% endblock %}

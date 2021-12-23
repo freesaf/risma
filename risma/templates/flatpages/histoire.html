@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load  flatpages_tags %}
+{% block title %}{{ flatpage.title }} {% endblock %}
+
+{% block description %}
+	{{ flatpage.content|striptags|truncatewords:30|safe }}
+{% endblock %}
+
+{% if flatpage.image %}
+
+{% block image_src %}
+	http://{{ request.META.HTTP_HOST }}{% thumbnail flatpage.image 180x180 crop %}
+{% endblock %}
+
+{% block meta-keywords %}{{ flatpage.mot_cle}}{% endblock %}
+{% endif %}
+
+{% block titre_page %}{{ flatpage.title }}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/{{ flatpage.categorie|slugify }}.png" />
+</div>
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}top30 borderBottom{% endblock %}
+{% block corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	{% get_pagestatiques flatpage.categorie %}
+	<div class="clr"></div>
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="top30">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> {{ flatpage.categorie }} </a> > <a href="{{ flatpage.url }}" class="bleu"> {{ flatpage.title }}</a>
+	</div>
+	<h1 class="uppercase light top20">{{ flatpage.title }}</h1>
+</div> <!-- bloc_titre_page -->
+<div id="contenu_page" class="top30">
+	<h2 class="bleu uppercase light">
+		UNe success-story marocaine
+	</h2>
+	<ul id="timeline">
+		
+		<li>
+			<span class="year2 year block colonne">2013</span>
+			<span class="between_year block colonne heightLong"></span>
+			<span class="content_year block colonne">
+				<span class="fleche_ block absoluteLayout"></span>
+				  - 30 hôtels, 4 662 chambres  <br />
+				  - 1 521 489 nuitées soit 8% des nuitées du Royaume   <br />
+				  - Une présence dans 13 villes à travers 8 marques fortes  <br />
+				  - 4,4 milliards de dirhams d’investissement réalisés en 15 ans  <br />
+				  - 2 400 salariés  <br />
+				  - Taux d’occupation moyen de 64% sur l’ensemble du Maroc contre 43% pour l’ensemble du marché  <br />
+				  - Chiffre d’affaire de 1 475 millions de dirhams en progression de 14% 
+			</span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li class="separateur">
+			<span class="year block colonne"></span>
+			<span class="between_year block colonne"></span>
+			<span class="content_year block colonne"></span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li>
+			<span class="year2 year block colonne">2006</span>
+			<span class="between_year block colonne height2"></span>
+			<span class="content_year block colonne">
+				<span class="fleche_ block absoluteLayout"></span>
+				Risma s’introduit en Bourse par augmentation de capital. Elle est la première société touristique cotée à la Bourse de Casablanca. 
+			</span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li class="separateur">
+			<span class="year block colonne"></span>
+			<span class="between_year block colonne"></span>
+			<span class="content_year block colonne"></span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li>
+			<span class="year year2 inlineBlock colonne">1999</span>
+			<span class="between_year block colonne height2"></span>
+			<span class="content_year block colonne">
+				<span class="fleche_ block absoluteLayout"></span>
+				Accor s’allie à un groupe d’institutionnels marocains, à savoir Asma Invest, BMCE Bank, Mamda-Mcma, Nexity, RMA-Watanya et CFG développement, afin de créer un opérateur touristique de référence au Maroc. 
+			</span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li class="separateur">
+			<span class="year block colonne"></span>
+			<span class="between_year block colonne"></span>
+			<span class="content_year block colonne"></span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li>
+			<span class="year year3 inlineBlock colonne">1996</span>
+			<span class="between_year block colonne height2"></span>
+			<span class="content_year block colonne">
+				<span class="fleche_ block absoluteLayout"></span>
+				Convaincu du potentiel touristique du Royaume, Accor décide de renforcer sa présence au Maroc et signe une Convention Cadre avec le gouvernement marocain avec, comme objectif, d’atteindre une capacité de 7.000 chambres à terme.
+			</span>
+			<div class="clr"></div>
+		</li>
+		<li class="separateur">
+			<span class="year block colonne"></span>
+			<span class="between_year block colonne"></span>
+			<span class="content_year block colonne"></span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+		<li>
+			<span class="year year2 inlineBlock colonne">1993</span>
+			<span class="between_year block colonne"></span>
+			<span class="content_year block colonne">
+				<span class="fleche_ block absoluteLayout"></span>
+				Le groupe Accor crée Risma pour gérer les contrats de deux villages de vacances sous l’enseigne Coralia. 
+			</span>
+			<div class="clr"></div>
+		</li>
+		<li class="clr"></li>
+	</ul>
+	
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = document.location.href;
+		var index_url = "/"+url.split('/')[3]+"/";
+		$('#sous_menu_page a[href="'+index_url+'"]').addClass('current_page_item');
+		$(".current_page_item").parent().addClass("active");
+		
+		/*var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				$(".active").addClass("out");
+			}
+			else {
+				$(".active").removeClass("out");
+			}
+			
+			},function(){
+				$(".active").removeClass("out");
+		});*/
+	});
+	
+	
+</script>
+{% endblock %}
+{% block bas_corps %}
+{% include "include/bas_corps.html" %}
+{% endblock %}
+{% comment %}
+{% block content %}
+		<div class="article">
+			{% if flatpage.image %}
+				<p class="photo_article colonne"><span class="block absoluteLayout alignCenter">{{ flatpage.title }}</span>
+				
+			{% endif %}
+			
+		<div class="clr"></div>
+		</div>	
+		
+------------
+{% for r in random %}
+	{{ r.title }} <br> 
+{% endfor %}
+
+{{r}}
+
+-------------
+
+
+
+{% endblock %} <!-- fin de block contenuCentre -->
+{% endcomment %}

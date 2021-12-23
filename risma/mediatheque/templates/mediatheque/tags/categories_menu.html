@@ -1,0 +1,4 @@
+{% for cat in categories %}
+	<a href="{{ cat.get_absolute_url }}" class="{% if cat.slug|slugify == current_cat|slugify %}active{% endif %}">{{ cat }}dd | </a>
+{% endfor %}
+

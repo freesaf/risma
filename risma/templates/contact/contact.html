@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load  flatpages_tags %}
+{% block title %}Contactez-nous{% endblock %}
+{% block description %}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/autres.png" />
+</div>
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block top_corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	<li class="lien_autre none"><a href="/blog/">Actualités</a></li>
+	<li class="lien_contact none"><a href="{% url contact %}">Contact</a></li>
+		{% get_pagestatiques "autres" %}
+	<div class="clr"></div>
+	<script type="text/javascript">
+		var l_contact = $(".lien_contact").html();
+		var l_contact2 = $(".lien_autre").html();
+		$("#sous_menu_page ul").prepend("<li class='active'>"+l_contact+"</li>");
+		$("#sous_menu_page ul").prepend("<li class=''>"+l_contact2+"</li>");
+		$(".lien_contact").remove();
+			$(".lien_autre").remove();
+		//var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				//$(".active").addClass("out");
+			}
+			else {
+				//$(".active").removeClass("out");
+			}
+			},function(){
+				//$(".active").removeClass("out");
+		});
+		//$(".bg_move").css("margin-left" , 243);
+	</script>
+	
+</div> <!-- sous_menu_page -->
+
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> Autres rubriques </a> > <a href="{% url contact %}" class="bleu">contact</a>
+	</div>
+	<h1 class="uppercase light top20">contact</h1>
+</div> <!-- bloc_titre_page -->
+
+{% endblock %}
+{% block corps %}
+<div id="contenu_page" class="top30">
+	
+<div id="formulaire" class="colonne content">
+	<h2 class="uppercase bleu bottom30 light">Formulaire de renseignement</h2>
+	<form id ="fcontact" class="typeText"  action="{% url contact %}" method="POST"  enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<div class="clr"></div>
+	<div class="alignRight"><input class="btn2" type="submit" value="{% trans "Envoyer" %}" /></div>
+	<div class="clr"></div>
+	</form>
+</div>
+<script type="text/javascript">
+	$("textarea").parent().addClass("pLarge");
+	
+</script>
+
+<div id="side" class="right">
+	<h2 class="light uppercase bottom20 bleu">
+	Société d’investissement & propriètaire hôtelier
+</h2>
+<p class="bottom10">
+	<span class="bold">Adresse :</span> 97, bd Massira El Khadra,<br /> 5<sup>ème</sup> étage – Casablanca - Maroc
+</p>
+<p class="bottom10">
+	<span class="bold">Tél. :</span> +212 520 40 10 10 <br />
+	<span class="bold">Fax : </span>+212 520 40 10 11
+</p>
+<!--
+<p>
+	<span class="bold">E-mail:</span> contact@risma.com  - <br /> Fatim-zahra.ZOUITENE@accor.com
+<br />
+	<span class="bold">Site Web:</span> www.risma.com
+</p>-->
+	<div>
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.6919711611054!2d-7.642652849999992!3d33.587346100000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d2e8b8ac1aaf%3A0x1ae7cac1435f4910!2s97+Boulevard+Al+Massira+Al+Khadra!5e0!3m2!1sfr!2s!4v1400661955611" width="280" height="400" frameborder="0" style="border:0"></iframe>
+	</div>
+</div>
+
+<div class="clr"></div>
+
+</div>
+{% endblock %}
+{% block cont_bas %}
+{% endblock %}

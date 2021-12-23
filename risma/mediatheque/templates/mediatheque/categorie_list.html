@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load thumbnail zinnia_tags %}
+{% block title %}Galerie photo{% endblock %}
+{% block meta-keywords %}{% for cat in categories %}{{ cat }}, {% endfor %}{% endblock %}
+{% block content %}
+<h1 class="titre bleu bottom20">Médiathèque</h1>
+		<div class="details_revue">
+			{% for cat in categories %}
+				<div class="album bottom30 {% cycle 'colonne' 'right' %}">
+					<a href="{{ cat.get_absolute_url }}"><img alt='{{ cat }}' src="{% thumbnail cat.image_principale 268x175 crop %}" /></a>
+					<h3 class="top10"><a class="noir" href="{{ cat.get_absolute_url }}" title="{{ cat }}">{{ cat }}</a></h3>
+				</div>
+			{% endfor %}
+			<div class="clr"></div>
+		</div>
+{% endblock %}

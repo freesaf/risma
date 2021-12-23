@@ -1,0 +1,29 @@
+<div id="header">
+	<div id="espaceblanc" class="">
+		
+	</div>
+	<div id="ch" class="container centerAuto relativeLayout">
+		<div id="logo" class="colonne"><a href="{% url index %}"><img src="{{ MEDIA_URL }}images/logo01.jpg" alt="RISMA" /></a></div>
+	<div id="menu" class="colonne">
+		<div id="bloc_bourse" class="absoluteLayout petit">
+			{% load indicateur_tag %}
+    		{% indicateur %}
+			
+		</div>
+		{% include "include/menu.html" %}
+	</div>
+	</div>
+	
+	<div class="colonne"></div>
+	<div class="clr"></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var full = ($("body").width()-960)/2;
+			var pos = $("#ch").position();
+			$("#espaceblanc").width(pos.left);
+			$("#espaceblanc").width(full);
+		});
+		
+	</script>
+</div><!-- header -->
+

@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load  flatpages_tags %}
+{% block title %}{{ flatpage.title }} {% endblock %}
+
+{% block description %}
+	{{ flatpage.content|striptags|truncatewords:30|safe }}
+{% endblock %}
+
+{% if flatpage.image %}
+
+{% block image_src %}
+	http://{{ request.META.HTTP_HOST }}{% thumbnail flatpage.image 180x180 crop %}
+{% endblock %}
+
+{% block meta-keywords %}{{ flatpage.mot_cle}}{% endblock %}
+{% endif %}
+
+{% block titre_page %}{{ flatpage.title }}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/{{ flatpage.categorie|slugify }}.png" />
+</div>
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}top30 borderBottom{% endblock %}
+{% block corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	{% get_pagestatiques flatpage.categorie %}
+	<div class="clr"></div>
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="top30">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> {{ flatpage.categorie }} </a> > <a href="{{ flatpage.url }}" class="bleu"> {{ flatpage.title }}</a>
+	</div>
+	<h1 class="uppercase light top20">{{ flatpage.title }}</h1>
+</div> <!-- bloc_titre_page -->
+<div id="contenu_page" class="top30">
+	{% if flatpage.image %}
+	   <img class="colonne" src="{% thumbnail flatpage.image 313x268 crop %}" />
+	{% endif %}
+	    {{ flatpage.content|safe }}
+	
+	<div class="clr"></div>
+	
+	<div id="cont_carte" class="relativeLayout bottom50 top30">
+	<div id="image_ref_carte"><img src="{{ MEDIA_URL }}images/image_ref_carte.png" alt="" /></div>
+	<div class="cercle_ absoluteLayout tanger">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a class="block cercles ibis_b" href="/hotels/hotel/ibis-budget-tanger/" target="_blank"><span>ibis budget</span></a>
+					
+				</li>
+				<li class=""><a href="/hotels/hotel/ibis-tanger-free-zone/" class="block cercles ibis" target="_blank"><span>ibis tanger free zone</span></a></li>
+				<li class=""><a href="/hotels/hotel/ibis-tanger-city-center/" class="block cercles ibis" target="_blank"><span>ibis Tanger city center</span></a></li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="cercle_ absoluteLayout fnideq">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-fnideq/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="cercle_ absoluteLayout wajda">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-oujda/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout fes">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-fes/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/fes-sofitel-fes-palais-jamai/" class="block cercles sofitel" target="_blank"><span>Sofitel</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout rabat">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-rabat/" class="block cercles ibis" target="_blank"><span>ibis </span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/mercure-rabat-sheherazade/" class="block cercles" target="_blank"><span>Mercure</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/le-diwan-rabat-mgallery-collection/" class="block cercles gallery" target="_blank"><span>M’Gallery</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-rabat-jardin-des-roses/" class="block cercles sofitel" target="_blank"><span>Sofitel</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout meknes">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-meknes/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="cercle_ absoluteLayout casablanca">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-casablanca-sidi-maarouf/" class="block cercles ibis" target="_blank"><span>ibis Casablanca Sidi Maarouf</span></a>
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-casablanca-city-center/" class="block cercles ibis" target="_blank"><span>ibis Casablanca city center</span></a>
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-casa-voyageurs/" class="block cercles ibis" target="_blank"><span>ibis Casa-Voyageurs</span></a>
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-casablanca-nearshore/" class="block cercles ibis" target="_blank"><span>ibis Casablanca Nearshore</span></a>
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/novotel-casablanca-city-center/" class="block cercles novotel" target="_blank"><span>Novotel</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-casablanca-tour-blanche/" class="block cercles sofitel" target="_blank"><span>Sofitel</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout jdida">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-budget-el-jadida/" class="block cercles ibis_b" target="_blank"><span>ibis budget</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-el-jadida/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="cercle_ absoluteLayout marakesh">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-marrakech-centre-gare/" class="block cercles ibis" target="_blank"><span>ibis Marrakech centre gare</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-marrakech-palmeraie/" class="block cercles ibis" target="_blank"><span>ibis Marrakech Palmeraie</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/suite-novotel-marrakech/" class="block cercles suite_novotel" target="_blank"><span>Suite Novotel</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/pullman-marrakech-palmeraie-resort-and-spa/" class="block cercles pullman" target="_blank"><span>Pullman</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-marrakech-lounge-and-spa/" class="block cercles sofitel" target="_blank"><span>Sofitel Marrakech Lounge and Spa</span></a>
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-marrakech-palais-imperial/" class="block cercles sofitel" target="_blank"><span>Sofitel Marrakech Palais Imperial</span></a>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+	<div class="cercle_ absoluteLayout essouira">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/le-medina-essaouira-hotel-thalassa-sea-spa-mgaller/" class="block cercles gallery" target="_blank"><span>M’Gallery</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout ourzazate">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-ouarzazate/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="cercle_ absoluteLayout agadir">
+		<div class="popup_cercle">
+			<span class="active_fleche"></span>
+			<ul>
+				<li class="">
+					<a href="/hotels/hotel/ibis-budget-agadir/" class="block cercles ibis_b" target="_blank"><span>ibis budget</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/ibis-agadir/" class="block cercles ibis" target="_blank"><span>ibis</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-agadir-thalassa-sea-spa/" class="block cercles sofitel" target="_blank"><span>Sofitel Agadir Thalassa Sea & Spa</span></a>
+					
+				</li>
+				<li class="">
+					<a href="/hotels/hotel/sofitel-agadir-royal-bay-resort/" class="block cercles sofitel" target="_blank"><span>Sofitel Agadir Royal Bay Resort</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = document.location.href;
+		var index_url = "/"+url.split('/')[3]+"/";
+		$('#sous_menu_page a[href="'+index_url+'"]').addClass('current_page_item');
+		$(".current_page_item").parent().addClass("active");
+		/*var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				$(".active").addClass("out");
+			}
+			else {
+				$(".active").removeClass("out");
+			}
+			
+			},function(){
+				$(".active").removeClass("out");
+		});
+		$(".bg_move").css("margin-left" , 68);*/
+	});
+	
+	
+</script>
+
+
+
+{% endblock %}
+{% block bas_corps %}
+{% include "include/bas_corps.html" %}
+{% endblock %}
+{% comment %}
+{% block content %}
+		<div class="article">
+			{% if flatpage.image %}
+				<p class="photo_article colonne"><span class="block absoluteLayout alignCenter">{{ flatpage.title }}</span>
+				
+			{% endif %}
+			
+		<div class="clr"></div>
+		</div>	
+		
+------------
+{% for r in random %}
+	{{ r.title }} <br> 
+{% endfor %}
+
+{{r}}
+
+-------------
+
+
+
+{% endblock %} <!-- fin de block contenuCentre -->
+{% endcomment %}

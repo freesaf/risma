@@ -1,0 +1,23 @@
+{% load thumbnail %}
+
+	<h2 ><a href="{% url communique %}">Revue de presse</a></h2>
+	
+			{% for presse in presse_list %}
+				<div class="resume_presse arial colonne {% if forloop.counter|divisibleby:'2' %}noEspace{% endif %}">
+					<ul class="horizontal">
+						<li class="thumb_resume_presse"><a href="{{ presse.get_absolute_url }}"><img src="{% thumbnail presse.media_photo 111x90 crop %}" alt="{{ presse.titre }}" /></a></li>
+						<li class="txt_resume_presse">
+							<h3 class="bottom5"><a class="noir" href="{{ presse.get_absolute_url }}">{{ presse.titre }}</a></h3>
+							<span class="block rouge bottom5">Ajouté le {{ presse.date }}</span>
+							<p>
+								{{ presse.description|truncatewords:17|safe }}
+							</p>
+						</li>
+					</ul>
+					<div class="clr"></div>
+				</div>
+			{% endfor %}
+			
+
+	
+

@@ -1,0 +1,64 @@
+CTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Risma</title>
+		<link rel="stylesheet" media="screen" href="css/utils.css">
+		<link rel="stylesheet" media="screen" href="css/style.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('input[type="text"]').focus(function(){
+					$("label").hide();
+					$(this).css("opacity" , 1);
+				});
+				$('input[type="text"]').blur(function(){
+					var valeur = $(this).val();
+					if( valeur !== "" && valeur !== null ) {
+						$("label").hide();
+						$(this).css("opacity" , 1);
+					}
+					else {
+						$("label").show();
+						$(this).css("opacity" , 0);
+					}
+					
+				});
+			});
+			
+		</script>
+    </head>
+    <body>
+    	<div id="logo" class="alignCenter"><img src="images/logo.png" /></div>
+		
+		<div id="bloc_bleu">
+			<div id="img" class="alignCenter absoluteLayout"></div>
+			<h1 class="uppercase alignCenter">Site en construction</h1>
+			<p class="alignCenter bottom30">
+				Pour rester informéur les actualitéde RISMA, merci de renseigner votre adresse email
+			</p>
+			<div id="newsletter" class="centerAuto">
+				<form class="typeLabel">
+					<ul class="horizontal">
+						<li class="li_input">
+							<label>Votre adresse e-mail ici</label>
+							<input type="text" />
+						</li>
+						<li  class="li_submit"><input type="submit" value="ENVOYER" /></li>
+					</ul>
+					<div class="clr"></div>
+				</form>
+			</div>
+			
+			<div id="copyright" class="alignCenter">
+				
+				© RISMA 2013   -   Site By <a href="http://www.wbc.ma" title="web, buzz & Communities" target="_blank"><img src="images/wbc.png" alt="Web, Buzz & Community" /></a>
+			</div>
+			
+		</div>
+		
+    </body>
+</html>
+
+

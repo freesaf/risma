@@ -1,0 +1,9 @@
+<div>
+{% for n in news %}
+	{% with "include/template_"|add:n.type|add:".html" as template %}
+		{% include template %}
+	{% endwith %}
+{% endfor %}
+</div>
+	
+	

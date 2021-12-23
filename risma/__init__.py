@@ -1,0 +1,1 @@
+__CMS_WBC_VERSION__ = "0.1a"

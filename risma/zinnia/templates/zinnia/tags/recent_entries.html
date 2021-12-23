@@ -1,0 +1,41 @@
+{% load i18n thumbnail %}
+
+<div id="slider_actus" class="relativeLayout">
+	<h1 class="bottom20 uppercase">Dernières actualités</h1>
+	<div id="navigation_slider_actus" class="absoluteLayout">
+		<ul class="horizontal">
+			<li class="cercle"><img src="/site_media/images/cercle_active.png" /></li>
+			<li class="cercle"><img src="/site_media/images/cercle.png" /></li>
+			<li class="cercle"><img src="/site_media/images/cercle.png" /></li>
+		</ul>
+	</div>
+	<div class="images_slider_actus">
+	<ul class="horizontal">
+  {% for entry in entries %}
+  	{% with entry.categories.all as categories %}
+		<li class="actu">
+			<ul class="horizontal">
+				<li class="thumb_actu">
+					<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark"><img src="{% thumbnail entry.contenu_media1.miniature 250x211 crop %}" /></a>
+				</li>
+				<li class="txt_actu">
+					<span class="block bold">{{ entry.creation_date|date:"d F Y" }}</span>
+					<h2 class="bleu top10 bottom20"><a href="{{ entry.get_absolute_url }}" class="bleu">{{ entry.title }}</a></h2>
+					<p>
+						{{ entry.excerpt|truncatewords_html:28|safe }} 
+					</p>
+					<a href="{{ entry.get_absolute_url }}" class="btn_bleu">lire la suite</a>
+				</li>
+			</ul>
+			<div class="clr"></div>	
+		</li>
+	{% endwith %}
+  {% empty %}
+	  <p>
+	    {% trans "No entries yet." %}
+	  </p>
+  {% endfor %}
+  </ul>
+  <div class="clr"></div>
+  </div>
+ </div>

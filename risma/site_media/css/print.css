@@ -1,0 +1,69 @@
+body {
+	background-color :#fff;
+	  font-family :Serif;
+	  font-size :12pt;
+}
+.horiontal li, .colonne, .right {
+	float : none !important;
+	width : 100%;
+} 
+#menu, #footer, .block_partage_news, .icons_partage, .page form, #side_bar {
+	display : none;
+}
+#header {
+	background-color : #525252;
+}
+#page { /* Modifications : suppression de la bordure - marges */
+  margin :0;
+  border :none;
+}
+#content a[href^="/"]:after {
+  content: " (http://www.localhost" attr(href) ") ";
+  text-decoration : underline;
+}
+.noneP {
+	display : none;
+}
+/*
+ * exemple
+
+body {
+  background: white;
+  font-size: 12pt;
+  }
+#menu {
+  display: none;
+  }
+#wrapper, #content {
+  width: auto;
+  margin: 0 5%;
+  padding: 0;
+  border: 0;
+  float: none !important;
+  color: black;
+  background: transparent none;
+  }
+div#content {
+  margin-left: 10%;
+  padding-top: 1em;
+  border-top: 1px solid #930;
+  }
+div#mast {
+  margin-bottom: -8px;
+  }
+div#mast img {
+  vertical-align: bottom;
+  }
+a:link, a:visited {
+  color: #520;
+  background: transparent;
+  font-weight: bold;
+  text-decoration: underline;
+  }
+#content a:link:after, #content a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+  }
+#content a[href^="/"]:after {
+  content: " (http://www.alistapart.com" attr(href) ") ";
+  } */

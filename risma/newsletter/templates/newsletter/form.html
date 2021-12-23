@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n thumbnail pagination_tags %}
+{% block title %}Liste des news{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+	 <form action="{% url newsletter_register %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="{% trans "S'inscrire" %}" />
+	</form>
+	{% load newsletter_tags %}
+	{% newsletter %}
+{% endblock %}

@@ -1,0 +1,25 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".overaly_").show();
+		$("#popup_").show();
+		$("#popup_ .close").click(function(){
+			$(".overaly_").fadeOut(500);
+			$("#popup_").fadeOut(500);
+		});
+	});
+</script>
+<div id="overlay_popup" class="overaly_"></div>
+<div class="description_popup">
+	<div class="popup_details" id="popup_">
+		<div class="close"><img alt="close" src="/site_media/images/close_popup.png"></div>
+		<div class="popup_produit bleu sousTitreN">
+			<h1> titre popup page accueil</h1>
+			<p>
+				Integer pharetra dictum nulla dapibus dapibus. Sed interdum, sapien vel semper pulvinar, nibh dui posuere augue, ac laoreet lacus nibh et justo. Integer condimentum elementum sollicitudin. Donec consectetur libero quis sem tincidunt accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras nulla turpis, vulputate condimentum venenatis at, consectetur vel risus. Nam porttitor facilisis metus, id auctor metus condimentum non. Maecenas ante justo, dapibus quis pulvinar a, mollis non lectus. 
+			</p>
+			<p>
+				n elementum ligula vitae dui cursus pretium. In justo velit, laoreet ac tristique sollicitudin, vulputate eget mauris. Morbi eleifend nisi quam. 
+			</p>
+		</div>
+	</div>
+</div>

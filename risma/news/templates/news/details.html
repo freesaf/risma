@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n thumbnail pagination_tags%}
+{% block title %}Liste des news{% endblock %}
+{% block description %}{{ news.contenu|truncatewords_html:25|safe }}{% endblock %}
+{% block content %}
+		<h1>{{ news.titre }}</h1>
+		<div>{{ news.contenu|safe }}</div>
+		{{ news.date|date:"d M Y" }}
+	
+	{% paginate %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n thumbnail pagination_tags %}
+{% block title %}Liste des news{% endblock %}
+{% block description %}{% endblock %}
+{% block content %}
+<div class="bloc article bottom10">
+		<h1 class="bleu icon_cercle_photos borderB uppercase">Citations</span></h1>
+	</div>
+	{% autopaginate news 10 %} 
+	{% for n in news %}
+	<div class="bloc article bottom10">
+		<div class="content_article bleu top20 sousTitreN">
+			{{ n.contenu|safe }} <div class="bold">{{ n.date|date:"d M Y" }}</div>
+		</div>
+	</div>
+	{% endfor %}
+	<div id="pagination" class="top20 bleu sousTitre alignCenter">
+		{% paginate %}
+		<div class="clr"></div>
+	</div>	
+{% endblock %}

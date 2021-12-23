@@ -1,0 +1,5 @@
+MAILTO=""
+SHELL="/bin/sh"
+PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+#0 */12 * * * cd /var/www/vhosts/risma.com/c200_risma/ && ./global_bmce.sh
+0 */12 * * * cd /var/www/vhosts/risma.com/c200_risma/ &&  ./bmce_indicateur.sh

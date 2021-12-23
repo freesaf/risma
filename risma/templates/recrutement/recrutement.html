@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n thumbnail  %}
+{% load  flatpages_tags %}
+{% block title %}Recrutement{% endblock %}
+{% block top_corps %}
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="{% url offre_list %}" class="gris"> Carriére </a> > <a href="#" class="bleu"> postuler</a>
+	</div>
+	<h1 class="uppercase light top20">Carriére</h1>
+</div> <!-- bloc_titre_page -->
+
+{% endblock %}
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/autres.png" />
+</div>
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block content %}
+<h1 class="uppercase bleu bottom30 light top30">Recrutement</h1>
+<div id="contenu_page">
+<div id="formulaire" class="bottom30">
+	<form id ="fcontact" class="typeText"  action="" method="POST"  enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<div class="clr"></div>
+	<div class="alignRight"><input class="btn2" type="submit" value="{% trans "POSTULER" %}" /></div>
+	<div class="clr"></div>
+	</form>
+</div>
+<script type="text/javascript">
+	$("textarea").parent().addClass("pLarge");
+	
+</script>
+</div>
+{% endblock %}

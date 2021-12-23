@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load contentadmin_tags %}
+{% block title %}{% trans "Espace sécurisé" %}{% endblock %}
+{% block extrastyle %}
+	<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/lightbox.css">
+{% endblock %}
+
+{% block content %}
+	<h1 class="titre rouge uppercase font23 bottom20">{% trans "Espace sécurisé" %}</h1>
+	
+	{% if type == "partenaire" %}
+		 <h1 class="uppercase font23 bottom20">>{% trans "Espace partenaire" %}</h1>
+	{% endif %}
+	
+	<div class="barre_blanc"></div>
+	<h2 class="uppercase">— Présentation</h2>
+	{% blocktext contenu_securise_partenaire text_contenu_securise_partenaire "texte de présentation de la page Espace sécurisé partenaire" %}default text{% endblocktext %}
+	<h2 class="top25 uppercase">— Documents</h2>
+	<div class="top10">
+		{% for f in fichiers %}
+			<p>
+				{{ f }} <a class="vert uppercase" href="{{ f.get_absolute_url }}" title='{{ f }}'>> Télécharger</a>
+			</p>
+		{% endfor %}
+		<div id="photos_espace_securise" class="article top25">
+			<h2 class="uppercase">— Photos</h2>
+			{% load carousel %}
+			{% carousel "lightbox_contenu_securise" "lightbox_contenu_securise" "120x120" "lightbox" %}
+		</div>
+	</div>
+	
+	<a href="{% url logout %}">Se déconnecter de l'espace sécurisé</a>
+{% endblock %}

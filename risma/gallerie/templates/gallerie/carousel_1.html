@@ -1,0 +1,30 @@
+{% load thumbnail %}
+<div id="{{ div_id }}" class="">
+	<div id="prev_{{ div_id }} none" class="prev_carousel"></div>
+	<div id="next_{{ div_id }} none" class="next_carousel"></div> 
+	<div id="description_{{ div_id }}" class="description_carousel none"></div>
+	<ul>
+	{% for photo in photos %}
+		
+		<li class="slide_full relativeLayout"><div class="titre_image absoluteLayout">{{ photo.titre|safe }}</div><img src="{% thumbnail photo.photo taille crop %}" alt="{{ photo.titre }}" /></li>
+	{% endfor %} 
+	</ul>
+	<div class="clr"></div>
+</div>
+{% comment %}
+<div id="navigation_{{ div_id }}">
+	<div id="cercles_{{ div_id }}">
+	 	<ul>
+	    </ul>
+	</div>
+    <div class="player_{{ div_id }}" id="player_{{ div_id }}">
+     <ul>
+     </ul>
+     <div class="clr"></div>
+    </div><!-- player_carousel -->
+</div><!-- navigation-->
+{% endcomment %}
+<script type="text/javascript">
+var carousel_{{ div_id }} = new Ncarousel({ parent: "{{ div_id }}", effet : 'slide' });
+
+</script>

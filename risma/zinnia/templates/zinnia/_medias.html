@@ -1,0 +1,40 @@
+{% load zinnia_tags %}
+<h3>Media 1</h3>
+ {% with object.contenu_media1 as media_principal %}
+	  {% if media_principal %}
+	  	{% if media_principal.type_media == 'image' %}
+	  	  <img src="{{ media_principal.contenu }}" alt="{{ media_principal.titre }}"
+	  	  	   title="{{ media_principal.titre }}" /><br />
+	  	{% else %}
+	  		<img src="{{ media_principal.miniature }}" />
+	  		{{ media_principal.contenu|safe }}
+	  	{% endif %}
+	  {% endif %}
+  {% endwith %}
+ 	<br /><br />
+ 	
+ <h3>Media 2</h3>
+  {% with object.contenu_media2 as media_principal %}
+	  {% if media_principal %}
+	  	{% if media_principal.type_media == 'image' %}
+	  	  <img src="{{ media_principal.contenu }}" alt="{{ media_principal.titre }}"
+	  	  	   title="{{ media_principal.titre }}" /><br />
+	  	{% else %}
+	  		<img src="{{ media_principal.miniature }}" />
+	  		{{ media_principal.contenu|safe }}
+	  	{% endif %}
+	  {% endif %}
+  {% endwith %}
+  
+ <h3>Autres medias</h3>  
+   {% for media in object.contenumedia_set.all %}
+  {% with media.type_media as type_media %}
+	{% if media.type_media == 'image' %}
+  	  <img src="{{ media.contenu }}" alt="{{ media.titre }}"
+  	  	   title="{{ media.titre }}" /><br />
+  	{% else %}
+  		<img src="{{ media.miniature }}" />
+  		{{ media.contenu|safe }}
+  	{% endif %}
+  {% endwith %}<br /><br />
+  {% endfor %}

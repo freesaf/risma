@@ -1,0 +1,9 @@
+input[type="submit"] {
+	width : 75px;
+}
+#newsletters input[type="text"]{
+	width : 180px;
+}
+#footer .right {
+	margin-top : 10px;
+}

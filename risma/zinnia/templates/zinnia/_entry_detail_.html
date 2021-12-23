@@ -1,0 +1,108 @@
+{% load tagging_tags i18n disqus_tags thumbnail %}
+
+<div class="news">
+	<h1><a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+        {{ object.title }}
+      </a>
+	  {% if object.authors.count %}
+      {% for author in object.authors.all %}
+      
+	  {% if not forloop.last %}, {% endif %}
+      {% endfor %}
+     
+      {% endif %}
+		<span class="sous_titre">{{ object.creation_date|date:"DATE_FORMAT" }} écrit par 
+		<span class="vert">
+			{% if object.authors.count %}
+		      {% for author in object.authors.all %}
+		      {{ author }}
+		      {% if not forloop.last %}, {% endif %}
+		      {% endfor %}
+		      {% else %}
+		      {% trans "admin " %}
+		    {% endif %}	
+		</span>
+		dans <span class="vert">
+			 {% if object.categories.count %}
+		      {% for category in object.categories.all %}
+		        <a href="{{ category.get_absolute_url }}" title="{{ category }}" rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+			  {% endfor %}
+			  {% endif %}.
+		</span></span>
+	</h1>
+	<div id="contenu_article">
+		    
+			{% load zinnia_tags %}
+			 {% with object.contenu_media1 as media_principal %}
+				  {% if media_principal %}
+					  	{% if media_principal.type_media == 'image' %}
+						<p class="alignCenter">
+					  	  <img src="{% thumbnail media_principal.miniature 490x290 %}" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+						</p>
+					  	{% else %}
+						<p class="alignCenter">
+					  		{{ media_principal.contenu|safe }}
+						</p>
+					  	{% endif %}
+				  {% else %}
+					<p class="alignCenter">
+					  	  <img src="{{ MEDIA_URL}}images/no_picture.jpg" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+					</p>
+				  {% endif %}<!-- media principal -->
+			  {% endwith %}
+			  
+			  {% with object.contenu_media2 as media_principal %}
+				  {% if media_principal %}
+					  	{% if media_principal.type_media == 'image' %}
+						<p class="alignCenter">
+					  	  <img src="{% thumbnail media_principal.miniature 490x290 %}" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+						</p>
+					  	{% else %}
+						<p class="alignCenter">
+					  		{{ media_principal.contenu|safe }}
+						</p>
+					  	{% endif %}
+				  {% else %}
+					<p class="alignCenter">
+					  	  <img src="{{ MEDIA_URL}}images/no_picture.jpg" alt="{{ media_principal.titre }}" title="{{ media_principal.titre }}" />
+					</p>
+				  {% endif %}<!-- media principal -->
+			  {% endwith %}			  
+			  {% for media in object.contenumedia_set.all %}
+			  {% with media.type_media as type_media %}
+			        {% if type_media == 'image' %}
+			          <img src="{{ media.miniature.url }}" alt="{{ media.titre }}"
+			                   title="{{ media.titre }}" /><br />
+			        {% else %}
+			                <img src="{{ media.miniature.url }}" />
+			                {{ media.contenu|safe }}
+			        {% endif %}
+			  {% endwith %}<br /><br />
+  			 {% endfor %}
+			<p>
+				{{ object_content }}
+			</p>
+	</div> <!-- contenu news -->
+	<div class="block_partage_news">
+		<div class="plie"><img src="{{ MEDIA_URL }}images/pixel.gif" /></div>
+		<div class="icons_partage addthis_toolbox addthis_default_style " 
+				addthis:url="{{ object.short_url }}" 
+				addthis:title="{{ object.title }}" 
+				addthis:description="trololol"
+				addthis:image="{{ media_principal.contenu.url }}">
+			<ul class="horizontal">
+				<li class="bg_line top5"><img src="{{ MEDIA_URL }}images/bg_line.png" /></li>
+				<li><span class="btn_gris block colonne">commentaires</span><span class="nombre block top5 colonne">	<a href="{{ object.get_absolute_url }}#disqus_thread" data-disqus-identifier="blogpost_{{ object.id }}"></a>
+	{% disqus_num_replies %}</span></li>
+				<li class="like_fb">
+					<a class="addthis_button_facebook_like" 
+						fb:like:layout="button_count" 
+						fb:image="{{ object.contenu_media1.miniature }}"></a>
+				</li>
+				<li class="tweet_tw"><a class="addthis_button_tweet" tw:via="swaplord" tw:related="WBC_ma"></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div><!-- icons partage -->
+	</div><!-- block icons partage -->
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebbbd3008659889"></script>

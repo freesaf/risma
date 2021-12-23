@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for popup in list %}
+	{{popup.titre}}
+	{{popup.image}}
+	{{popup.texte}}
+{% endfor %}
+
+{% endblock %}

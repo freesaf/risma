@@ -1,0 +1,7 @@
+{% for cat in categories %}
+	{% if cat.image %}
+		<img src="{{ cat.image.url }}" title="{{ cat }}" alt="{{ cat }}" />
+	{% endif %}
+	{{ cat }}
+	<div>{{ cat.description }}</div>
+{% endfor %}

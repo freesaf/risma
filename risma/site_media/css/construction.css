@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'helveticaregular';
+    src: url('../font/4864-webfont.eot');
+    src: url('../font/4864-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/4864-webfont.woff') format('woff'),
+         url('../font/4864-webfont.ttf') format('truetype'),
+         url('../font/4864-webfont.svg#helveticaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+	font-family: 'helveticaregular';
+	font-size : 13px;
+	color : #fff;
+	background : #006fb4;
+}
+#logo {
+	height : 354px;
+	background : #fff;
+}
+#bloc_bleu {
+	background : #006fb4;
+	padding-top : 115px;
+	position : relative;
+}
+#img {
+	width : 100%;
+	height : 132px;
+	background : url("../images/construction/img.png") no-repeat center;
+	top : -66px;
+}
+h1 {
+	font-size : 36px;
+	font-weight : normal;
+	padding-bottom : 40px;
+}
+#newsletter {
+	width : 520px;
+	height : 50px;
+	background : #71a8cb;
+	padding : 10px;
+}
+input[type="text"] {
+	width : 370px;
+	height : 46px;
+	border : #f0f0f0 solid 1px;
+	padding-left : 16px;
+	position : relative;
+	opacity : 0;
+}
+label {
+	padding-top : 18px;
+	padding-left : 16px;
+	color : #555555;
+	width : 371px;
+	height : 31px;
+	background : #fff;
+	z-index : 0;
+}
+.li_input {
+	width : 388px;
+}
+.li_submit {
+	width : 122px;
+	margin-left : 10px;
+}
+input[type="submit"] {
+	width : 122px;
+	height : 48px;
+	background : #006fb4;
+	border : none;
+	font-family: 'helveticaregular';
+	font-size : 13px;
+	color : #fff;
+	cursor : pointer;
+}
+#copyright{
+	font-size : 10px;
+	margin-top : 50px;
+	padding-bottom : 50px;
+}
+#copyright img {
+	vertical-align : middle;
+}

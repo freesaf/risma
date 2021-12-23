@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load thumbnail pagination_tags %}
+{% load i18n %}
+{% block title %} {% trans "Revue de presse" %}{% endblock %}
+{% block description %}{% trans "Communiqué de presse & Revue de presse" %} {{ presse.titre }} {% endblock %}
+
+{% block carousel %} 
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %} borderBottom{% endblock %}
+{% block top_corps %}
+
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="{% url communique %}" class="bleu"> Revue de presse </a>
+	</div>
+	<h1 class="uppercase light top20">Revue de presse</h1>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+{% block content %}
+	<div id="details_article" class="top20">
+		{% autopaginate presse 10 %} 
+		{% for p in presse %}
+		{% if p.revue_presse %}
+		 	<div class="revue">
+				<div class="photo_revue colonne"><a href="{{ p.get_absolute_url }}"><img alt="{{ p.titre }}" src="{% thumbnail p.media_photo 250x211 crop %}" /></a></div>
+				<div class="{% if p.revue_presse %}contenu_revue colonne{% else %}contenu_revue2{% endif %}">
+					<h2 class="bleu"><a class="bleu" href="/site_media/{{ p.fichier }}">{{ p.titre|truncatewords:10|safe }}</a></h2>
+					<span class="gris block bold top3">{% if p.media %}{{ p.media }} {% endif %} 
+						{% if p.get_diffusion_display  %} - ({{ p.get_diffusion_display }})  / {% endif %} {{ p.date }}</span>
+					<div class="top10">
+						{{ p.description|truncatewords:30|safe }}
+					</div>
+					<div class="">
+						<a href="{{ p.get_absolute_url }}" class="btn_bleu" target="">En savoir plus</a>
+					</div>		
+				</div>
+				<div class="clr"></div>
+			</div>
+		{% endif %}
+		{% endfor %}	
+		{% for p in presse %}
+		{% if not p.revue_presse %}
+		<h1 class="titre bleu bottom20">Communiqué de presse</h1>
+			<div class="revue bottom20">
+		 		{% if p.revue_presse %}
+				<div class="photo_revue colonne"><a href="{{ p.get_absolute_url }}"><img alt="{{ p.titre }}" src="{% thumbnail p.media_photo 180x100 crop %}" /></a></div>
+				{% endif %}
+				<div class="{% if p.revue_presse %}contenu_revue right{% else %}contenu_revue2{% endif %}">
+					<h2 class="noir"><a class="noir" href="{{ p.get_absolute_url }}">{{ p.titre }}
+					<span class="gris block">{% if p.media %}{{ p.media }} {% endif %} 
+						{% if p.get_diffusion_display  %} - ({{ p.get_diffusion_display }}) {% endif %} / {{ p.date }}</span>
+					</a>
+					</h2>
+					<div class="top10">
+						{{ p.description|truncatewords:30 }}
+					</div>
+					<p class="top5">
+						{% if p.fichier %}{% trans "Télécharger le communiqué de presse en français" %}: <a class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier }}" target="_blank">>{% trans "Télécharger" %}</a>{% endif %}    
+					</p>
+					<p class="top5">
+						{% if p.fichier_en %}{% trans "Télécharger le communiqué de presse en anglais" %}: <a class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier_en }}" target="_blank">>{% trans "Télécharger" %}</a>{% endif %}		    
+					</p>
+					<p>
+						{% if p.fichier_ar %}{% trans "Télécharger le communiqué de presse en arabe " %}: <a  class="uppercase vert" href="{{ MEDIA_URL }}{{ p.fichier_ar }}" target="_blank">>{% trans "Télécharger" %}</a>{% endif %}
+					</p>
+					<div class="top20"><a href="{{ p.get_absolute_url }}" class="btnVert blanc">Lire la suite</a></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		{% endif %} 	
+		{% endfor %}
+		{% paginate %}
+	</div>
+{% endblock %}
+{% block cont_bas %}{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% block title %}  {{ presse.titre }} {% endblock %}
+{% block description %}{{ presse.description|striptags|truncatewords:30|safe }}{% endblock %}
+{% if presse.revue_presse %}
+{% block image_src %}http://{{ request.META.HTTP_HOST }}{% thumbnail presse.media_photo 180x180 %}{% endblock %}
+{% endif %}
+
+{% block carousel %} 
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %} borderBottom{% endblock %}
+{% block top_corps %}
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="{% url communique %}" class="gris"> Revue de presse </a> > <a href="#" class="bleu"> {{ presse.titre }} </a>
+	</div>
+	<h1 class="uppercase light top20">Revue de presse</h1>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+
+{% block content %}
+<div id="contenu_page" class="revue top20">
+	<div class="alignCenter"><img alt="{{ presse.titre }}" src="{% thumbnail presse.media_photo 500x300 %}" /></div>
+	<div class="top20">
+		<h2 class="bleu"><a class="bleu" href="{{ p.get_absolute_url }}">{{ presse.titre }}
+		</a>
+		</h2>
+		<span class="gris block bold top3">{% if presse.media %}{{ presse.media }} {% endif %} 
+			{% if presse.get_diffusion_display  %} - ({{ presse.get_diffusion_display }}) /{% endif %}  {{ presse.date }}</span>
+		<div class="top30" id="">
+			{{ presse.description|safe }}
+		</div>
+	</div>
+	<div class="clr"></div>
+
+<div class="cont_btn_telecharger top30">
+	{% if presse.fichier %}
+		<div class="file">
+			<ul class="horizontal">
+				<li class="titre_file bold">{{ presse.titre_fichier1 }} </li>
+				<li class="btn_telecharger right"><a href="/site_media/{{ presse.fichier }}" target="_blank"><img src="/site_media/images/btn_telecharger.png" alt="Télécharger" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+	{% endif %}
+	{% if presse.fichier2 %}
+		<div class="file">
+			<ul class="horizontal">
+				<li class="titre_file bold">{{ presse.titre_fichier2 }} </li>
+				<li class="btn_telecharger right"><a href="/site_media/{{ presse.fichier2 }}" target="_blank"><img src="/site_media/images/btn_telecharger.png" alt="Télécharger" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+	{% endif %}
+	{% if presse.fichier_ar %}
+		<div class="file">
+			<ul class="horizontal">
+				<li class="titre_file bold">{{ presse.titre }} </li>
+				<li class="btn_telecharger right"><a href="/site_media/{{ presse.fichier_ar}}" target="_blank"><img src="/site_media/images/btn_telecharger.png" alt="Télécharger" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+	   {% endif %}
+	{% if presse.fichier_en %}
+		<div class="file">
+			<ul class="horizontal">
+				<li class="titre_file bold">{{ presse.titre }} </li>
+				<li class="btn_telecharger right"><a href="/site_media/{{ presse.fichier_en}}" target="_blank"><img src="/site_media/images/btn_telecharger.png" alt="Télécharger" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+{% endif %}
+</div>
+</div>
+{% comment %}
+<h1 class="titre bleu">{{ presse.titre }}
+<span class="gris block">{% if presse.media  %}{{ presse.media }} - {{ presse.get_diffusion_display }} / {% endif %}{{ presse.date }}</span>
+</h1>
+<div class="details_revue">
+	{% if presse.revue_presse %}
+	<div id="photo_article_details" class="bottom20 top20 relativeLayout">
+	 <img src="{% thumbnail presse.media_photo 573x400 %}" alt="{{ presse.titre }}" />
+	</div>
+	{% endif %}
+	<div id="content_details" class="top25 bottom10">
+		<p>{{ presse.description|safe }}</p>
+	</div>	
+
+	{% if presse.lien %}
+	<div class="doc_telecharger">
+		<ul class="horizontal">
+			<li class="icon_pdf"><img src="/site_media/images/pixel.gif" width="18" height="24" alt="" /></li>
+			<li class="nom_doc"><a href="{{ presse.lien }}" target="_blank">{% trans "voir l'article" %}</a></li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+	{% endif %} 
+	<div class="doc_telecharger">
+		<ul class="horizontal">
+			<li class="icon_pdf"><img src="/site_media/images/pixel.gif" width="18" height="24" alt="" /></li>
+			<li class="nom_doc"><a href="{{ MEDIA_URL }}{{ presse.fichier }}" target="_blank">{% trans "Télécharger le communiqué (Fr)" %} </a></li>
+			<li class="icon_telecharger right"><a href="{{ MEDIA_URL }}{{ presse.fichier }}" target="_blank"><img src="/site_media/images/pixel.gif" width="46" height="38" alt="" /></a></li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+
+		{% if presse.fichier_ar %}
+		<div class="doc_telecharger">
+			<ul class="horizontal">
+				<li class="icon_pdf"><img src="/site_media/images/pixel.gif" width="18" height="24" alt="" /></li>
+				<li class="nom_doc"><a href="{{ MEDIA_URL }}{{ presse.fichier_ar }}" target="_blank">{% trans "Télécharger le communique (Ar)" %} </a></li>
+				<li class="icon_telecharger right"><a href="{{ MEDIA_URL }}{{ presse.fichier_ar }}" target="_blank"><img src="/site_media/images/pixel.gif" width="46" height="38" alt="" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+		{% endif %}
+		{% if presse.fichier_en %}
+		<div class="doc_telecharger">
+			<ul class="horizontal">
+				<li class="icon_pdf"><img src="/site_media/images/pixel.gif" width="18" height="24" alt="" /></li>
+				<li class="nom_doc"><a href="{{ MEDIA_URL }}{{ presse.fichier_en }}" target="_blank">{% trans "Télécharger le communique (en)" %} </a></li>
+				<li class="icon_telecharger right"><a href="{{ MEDIA_URL }}{{ presse.fichier_en }}" target="_blank"><img src="/site_media/images/pixel.gif" width="46" height="38" alt="" /></a></li>
+			</ul>
+			<div class="clr"></div>
+		</div>
+       {% endif %}
+	<div class="clr"></div>
+</div>
+{% endcomment %}
+{% endblock %}
+{% block cont_bas %}{% endblock %}

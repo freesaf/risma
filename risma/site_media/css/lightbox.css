@@ -1,0 +1,142 @@
+.lightbox li, .transOrange, .zoom {
+	width : 120px;
+	height : 120px;
+}
+.transOrange {
+	background : url('../images/transOrange.png');
+	display:none;
+	cursor : pointer;
+}
+.zoom {
+	background : url('../images/icon_zoom.png') no-repeat center;
+}
+.lightbox li:hover .transOrange {
+	display:block;
+}
+.overlay {
+	width:100%;
+	height:100%;
+	background:url("../images/lightbox/transNoir.png");
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:300;
+	display:none;
+}
+.box {
+	min-width:470px;
+	height:auto;
+	background:#fff;
+	margin: 0px auto;
+	position:relative;
+	top:2%;
+	color:#000;
+	text-align : center;
+}
+.box iframe, .box object {
+	max-width : 500px;
+	max-height : 500px;
+}
+.photo_lb {
+	position:relative;
+	padding:15px;
+}
+.box .loading {
+	display:block;
+	width : 97%;
+	position : absolute;
+	text-align : center;
+	background : url('../images/loading.gif') no-repeat center;
+}
+.nav_lb {
+	padding : 15px;
+	background:#fff;
+}
+.box .description_lb {
+	padding-bottom : 20px;
+	color : #d40138;
+	text-transform : uppercase;
+	background : url("../images/bg_titre.png") repeat-x 0 bottom;
+}
+.navigation_lb {
+	width:470px;
+	color:#fff;
+	padding:0 5px;
+	margin : 0 auto;
+	float:none;
+}
+.navigation_lb .thumb {
+	padding: 0 5px;
+	cursor:pointer;
+}
+.fermer_lb {
+	display:block;
+	width : 43px;
+	height : 38px;
+	background : url('../images/lightbox/close.jpg') no-repeat;
+	text-align:right;
+	position:absolute;
+	right:0;
+	top:0;
+	cursor : pointer;
+}
+/*
+.description_lb {
+	display:block;
+	padding:0 5px;
+	margin-top : 5px;
+	font-weight : bold;
+	position:absolute;
+	left:0;
+	color:#000;
+	display:none;
+}*/
+.fermer_lb a {
+	color:#000;
+	text-decoration:none;
+}
+.prev_lb {
+	width : 59px;
+	height : 59px;
+	background : url('../images/lightbox/prev.png') no-repeat;
+	float:left;
+	margin-top : 20px;
+}
+.prev_lb:hover {
+	background : url('../images/lightbox/prev2.png') no-repeat;
+}
+.next_lb {
+	width : 59px;
+	height : 59px;
+	background : url('../images/lightbox/next.png') no-repeat;
+	float:right;
+	margin-top : 20px;
+}
+.next_lb:hover {
+	background : url('../images/lightbox/next2.png') no-repeat;
+}
+.thumbnails_photos {
+	width : 300px;
+	height : 95px;
+	float : left;
+	margin-left : 23px;
+	position:relative;
+	overflow : hidden;
+}
+.thumb {
+	opacity : 0.5;
+	width : 90px;
+	height : 90px;
+	position : relative;
+	overflow : hidden;
+}
+.thumb img {
+	height : 90px;
+}
+.thumb:hover, .active_thumb {
+	opacity : 1;
+}
+.images_mini_lightbox_edition, .overlay_photos_artiste, .images_mini {
+	height:90px;
+	position:relative;
+}

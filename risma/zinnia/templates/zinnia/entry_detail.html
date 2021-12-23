@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load i18n  zinnia_tags disqus_tags thumbnail %}
+{% load  flatpages_tags %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block description %}{{ object.content|striptags|truncatewords:30|safe }}{% endblock %}
+{% block meta-keywords %}{% if object.tags %}{{ object.tags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% if object.contenu_media1.miniature %}
+	{% block image_src %}http://{{ request.META.HTTP_HOST }}{% thumbnail object.contenu_media1.miniature 180x180 %}{% endblock %}
+{% endif %}
+{% block extrahead %}
+  {{ block.super }}
+  {% with object.previous_entry as previous_entry %}{% if previous_entry %}
+  <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}" />
+  {% endif %}{% endwith %}
+  {% with object.next_entry as next_entry %}{% if next_entry %}
+  <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
+  {% endif %}{% endwith %}
+  <link rel="shortlink" href="{{ object.short_url }}" />
+  <link rel="canonical" href="{{ object.get_absolute_url }}" />
+
+  <link rel="alternate" type="application/rss+xml" title='Flux RSS' href="{% url zinnia_entry_latest_feed %}" />
+    <meta property="og:type" content="article"/> 
+    <meta property="og:url" content="http://{{ request.META.HTTP_HOST }}{{ object.get_absolute_url }}"/>
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block top_corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	<li class="lien_contact"><a href="/blog/">Actualités</a></li>
+	<li class="lien_autre none"><a href="{% url contact %}">Contact</a></li>
+		{% get_pagestatiques "autres" %}
+	<div class="clr"></div>
+	<script type="text/javascript">
+		var l_contact = $(".lien_contact").html();
+		var l_contact2 = $(".lien_autre").html();
+		$("#sous_menu_page ul").prepend("<li class=''>"+l_contact2+"</li>");
+		$("#sous_menu_page ul").prepend("<li class='active'>"+l_contact+"</li>");
+		
+		$(".lien_contact").remove();
+			$(".lien_autre").remove();
+		//var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				//$(".active").addClass("out");
+			}
+			else {
+				//$(".active").removeClass("out");
+			}
+			
+			},function(){
+				//$(".active").removeClass("out");
+		});
+		//$(".bg_move").css("margin-left" , 243);
+	</script>
+</div> <!-- sous_menu_page -->
+
+<div id="bloc_titre_page" class="bottom10">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> Autres rubriques </a> > <a href="{% url zinnia_entry_archive_index %}" class="noir"> Actualités</a> > <a class="bleu" href="#"> {{ object.title }}</a>
+	</div>
+	<h1 class="uppercase light top20">{{ object.title }}</h1>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/autres.png" />
+</div>
+{% endblock %}
+{% block corps %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.get('{% url entry_visit_count entry_id=object.pk|slugify %}');
+	});
+</script>
+
+	<div id="contenu_page" class="top30 ">
+{% block entry-content %} 
+  {% with object.html_content|safe as object_content %}
+ 	 {% include "zinnia/_entry_detail.html" %}
+  {% endwith %}
+{% endblock %}
+<div id="social">{% include "zinnia/_social.html" %}</div>
+</div>
+{% comment %}
+<div id="block_commentaires">
+	<div class="comment bg_blanc">
+	{% block entry-comments-form %}
+		{% if object.comments_are_open %}
+			{% disqus_dev %}
+			{% set_disqus_url object.link %}
+			{% set_disqus_developer 1 %}  
+			{% set_disqus_identifier "blogpost_" object.id %}
+			{% disqus_show_comments %}
+		{% endif %}
+	{% endblock %}
+   </div><!-- disqus -->
+</div>
+{% endcomment %}
+
+{% endblock %}
+{% block bloc1_offre %} {% endblock %}
+{% block cont_bas %}
+{% endblock %}

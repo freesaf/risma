@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}{{ categorie }}{% endblock %}
+{% block meta-keywords %}{% for i in categorie.images %}{{ i.titre }}, {% endfor %}{% for v in categorie.videos %} {{ v.titre }} {% endfor %}	{% endblock %}
+{% block image_src %}http://{{ request.META.HTTP_HOST }}{{ categorie.image_principale }}{% endblock %}
+{% block extrastyle %}
+	<link rel="stylesheet" media="screen" href="{{ MEDIA_URL }}css/lightbox.css">
+{% endblock %}
+{% block extrahead %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/lightbox.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var lightbox = new LightBox({ parent: "galerie_photos" ,  el :".photo_galerieG" });
+	});
+</script>
+{% endblock %}
+{% block content %}
+<div class="bloc article bottom10 cat_photos">
+	<h1 class="orange icon_cercle_photos borderB">{{ categorie }}</h1>
+</div>
+
+	<!--<h1>{{ categorie }}</h1>-->
+	<div id="galerie_photos">
+		{% for i in categorie.images %}
+		<div class="photo_galerieG bottom20">
+			<a href="#" class="block" title="{{ i.titre }}" rel="{% thumbnail i.image 582x582 crop %}">
+			<img src="{% thumbnail i.image 582x582 crop %}" alt="{{ i.titre }}" /></a>
+		</div>	
+		{% endfor %}
+		<div class="clr"></div>
+	</div>
+	{% comment %}
+	{% for v in categorie.videos %}	
+	<div class="bloc article cat_{{ categorie }}" id="{{ v.titre|slugify }}">
+		<h1 class="orange icon_cercle_{{ categorie }}">{{ v.titre }}</h1>
+		<div class="content_article orange top20">
+			{{ v.contenu|safe }}
+			<div class="barreOrange top20"></div>
+			<div class="clr"></div>
+		</div>
+	</div><!-- article orange -->
+	{% endfor %}
+	{% endcomment %}
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+{% load  flatpages_tags %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block description %}
+	{{ flatpage.content|striptags|truncatewords:30|safe }}
+{% endblock %}
+
+{% if flatpage.image %}
+
+{% block image_src %}
+	http://{{ request.META.HTTP_HOST }}{% thumbnail flatpage.image 180x180 crop %}
+{% endblock %}
+
+{% block meta-keywords %}{{ flatpage.mot_cle}}{% endblock %}
+{% endif %}
+
+{% block titre_page %}{{ flatpage.title }}{% endblock %}
+
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/{{ flatpage.categorie|slugify }}.png" />
+</div>
+{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %} borderBottom{% endblock %}
+{% block corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	{% get_pagestatiques flatpage.categorie %}
+	<div class="clr"></div>
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > organisation > <a href="{{ flatpage.url }}" class="bleu"> {{ flatpage.title }}</a>
+	</div>
+	<h1 class="uppercase light top20">{{ flatpage.title }}</h1>
+</div> <!-- bloc_titre_page -->
+<div id="contenu_page" class="top30 organisation">
+	    {{ flatpage.content|safe }}
+		<!--<img class="" src="{% thumbnail flatpage.image 960x800 crop %}" />-->
+	<div class="clr"></div>
+	
+	{% if flatpage.image %}
+	<div class="alignCenter">
+		<img class="" src="{{ flatpage.image.url }}" />
+	</div>
+	{% endif %}
+	
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = document.location.href;
+		var index_url = "/"+url.split('/')[3]+"/";
+		$('#sous_menu_page a[href="'+index_url+'"]').addClass('current_page_item');
+		$(".current_page_item").parent().addClass("active");
+		/*var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				$(".active").addClass("out");
+			}
+			else {
+				$(".active").removeClass("out");
+			}
+			
+			},function(){
+				$(".active").removeClass("out");
+		});
+		$(".bg_move").css("margin-left" , 235);*/
+	});
+	
+	
+</script>
+{% endblock %}
+{% block bas_corps %}
+{% include "include/bas_corps.html" %}
+{% endblock %}
+{% comment %}
+{% block content %}
+		<div class="article">
+			{% if flatpage.image %}
+				<p class="photo_article colonne"><span class="block absoluteLayout alignCenter">{{ flatpage.title }}</span>
+				
+			{% endif %}
+			
+		<div class="clr"></div>
+		</div>	
+		
+------------
+{% for r in random %}
+	{{ r.title }} <br> 
+{% endfor %}
+
+{{r}}
+
+-------------
+
+
+
+{% endblock %} <!-- fin de block contenuCentre -->
+{% endcomment %}

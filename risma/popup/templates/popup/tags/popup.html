@@ -1,0 +1,32 @@
+{% for p in popup %}
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".overaly_").show();
+		$("#popup_").show();
+		$("#popup_ .close").click(function(){
+			$(".overaly_").fadeOut(500);
+			$("#popup_").fadeOut(500);
+		});
+	});
+</script>
+<div id="overlay_popup" class="overaly_"></div>
+<div class="description_popup">
+	<div class="popup_details" id="popup_">
+		<div class="close"><img alt="close" src="/site_media/images/close_popup.png"></div>
+		<div class="popup_produit bleu sousTitreN">
+			{% if p.lien %}
+			<h1><a href="{{ p.lien }}">{{p.titre}}</a></h1>
+			<div id="image_popup"><a href="{{ p.lien }}"><img src="/site_media/{{p.image}}" alt="{{p.titre}}" /></a></div>
+			{% else %}
+				<h1>{{p.titre}}</h1>
+				<div id="image_popup"><img src="/site_media/{{p.image}}" alt="{{p.titre}}" /></div>
+			{% endif %}
+			<div id="content_popup">
+				{{p.texte|safe}}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endfor %}

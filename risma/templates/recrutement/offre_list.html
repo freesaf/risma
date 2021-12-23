@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n thumbnail zinnia_tags recrutement_tags %}
+{% block title %}Offre d'emploi{% endblock %}
+
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/carriere.png" />
+</div>
+{% endblock %}
+{% block top_corps %}
+<div id="bloc_titre_page" class="">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="{% url offre_list %}" class="bleu"> Carrière </a>
+	</div>
+	<h1 class="uppercase light top20">Carrière</h1>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+{% block corps %}
+
+<div id="contenu_page" class="top30">
+
+<div class="content colonne">
+	<p>Rejoignez le premier opérateur touristique au Maroc.</p>
+	<p>
+		Rejoindre Risma, c’est intégrer un groupe leader du tourisme au Maroc. De grandes opportunités de carrière s’offrent à vous dans nos deux principaux métiers, à savoir l’hôtellerie et la restauration, mais aussi dans des domaines tels que la finance, le marketing ou le management. 
+	</p>
+	<p>
+		Nos collaborateurs sont notre plus grande richesse. C’est pour cela que nous mettons à leur disposition un programme de formation pour accompagner leur évolution. Au sein de Risma, au-delà de l’exercice de votre métier, vous pourrez développer vos compétences et construire une carrière à long terme. 
+	</p>
+	<p>
+		Pour nous rejoindre, nous vous invitons à prendre contact avec notre service Ressources Humaines à l’adresse contact@risma.com ou en appelant le ( Accor Gestion Maroc : 05 22 97 78 00, Risma : 05 20 40 10 10 ).
+	</p>
+	{% if offres %}
+	<h2>Liste des offres</h2>
+	<div id="list_offre">
+		{% for offre in offres %}
+				<div class="offre">
+					<h3><a class="noir bold" href="{% url offre_detail offre.id %}">{{offre.nomposte}} </a></h3>
+					<ul class="top3">
+						<li>{{ offre.date_de_cloture }} - {{offre.localisation|safe }}</li>
+						<li class="top10"> {{offre.mission|truncatewords:32 }}</li>
+						
+					</ul>
+					<div class="top10 alignRight"><a class="btn" href="{% url offre_detail offre.id %}"> lire la suite</a></div>
+				</div>
+		{% endfor%}
+	</div>
+	{% endif%}
+</div>
+<div id="side" class="right">
+	{% get_recent_entries 3 "zinnia/tags/recent_entries2.html" %}
+</div>
+<div class="clr"></div>
+</div>
+
+{% endblock %}
+{% block content_full %}
+{% endblock %}
+{% block id_side_bar %}cont_actu{% endblock %}
+{% block cont_bas %}{% endblock %}
+{% block footer %}{% endblock %}
+{% comment %}
+<li><span class="violet bold">catégorie :</span> {{offre.categorie|safe }}</li>
+					<li><span class="violet bold">Mission :</span> {{offre.mission|safe }} </li>
+					<li><span class="violet bold">Profil :</span> {{offre.profil|safe }} </li>
+{% endcomment %}

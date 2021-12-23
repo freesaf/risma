@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load i18n zinnia_tags disqus_tags thumbnail %}
+{% load  flatpages_tags %}
+{% block meta-description %}
+{% trans "Latest entries for" %} 
+{% if category %}{% trans "the category" %} 
+	{{ category }}
+	{% if category.description %}: {{ category.description|striptags|safe }}
+	{% endif %}
+{% endif %}
+{% if tag %}
+	{% trans "the tag" %} 
+	{{ tag }}
+{% endif %}
+{% if author %}
+	{% trans "the author" %} {{ author }}
+{% endif %}
+{% if page_obj %}
+	{% ifnotequal page_obj.number 1 %} 
+	{% trans "page" %} {{ page_obj.number }}
+	{% endifnotequal %}
+{% endif %}
+{% endblock %}
+{% block extraheads %}
+  {{ block.super }}
+  {% if category %}
+    <link rel="alternate" type="application/rss+xml" title='{% trans "RSS Feed" %} {{ category.title }}' href="{% url zinnia_category_feed category.tree_path %}" />
+  {% endif %}
+  {% if tag %}
+    <link rel="alternate" type="application/rss+xml" title='{% trans "RSS Feed" %} {{ tag.name }}' href="{% url zinnia_tag_feed tag.name %}" />
+  {% endif %}
+  {% if author %}
+    <link rel="alternate" type="application/rss+xml" title='{% trans "RSS Feed" %} {{ author.username }}' href="{% url zinnia_author_feed author.username %}" />
+  {% endif %}
+{% endblock %}
+{% block title %}
+	{% trans "Latest entries" %} 
+	{% if category %}| 
+	{% trans "Category" %} 
+	{{ category }}{% endif %}
+	{% if tag %}| {% trans "Tag" %} 
+	{{ tag }}{% endif %}{% if author %}| 
+	{% trans "Author" %} {{ author }}
+	{% endif %}{% if page_obj %}
+	{% ifnotequal page_obj.number 1 %} | {% trans "Page" %} {{ page_obj.number }}
+	{% endifnotequal %}
+	{% endif %}
+{% endblock %}
+{% block bg_blanc %}{% endblock %}
+{% block classes_corps %}borderBottom{% endblock %}
+{% block top_corps %}
+<div id="sous_menu_page" class="top30 bleu alignCenter horizontal">
+	<li class="lien_contact"><a href="/blog/">Actualités</a></li>
+	<li class="lien_autre none"><a href="{% url contact %}">Contact</a></li>
+		{% get_pagestatiques "autres" %}
+	<div class="clr"></div>
+	<script type="text/javascript">
+		var l_contact = $(".lien_contact").html();
+		var l_contact2 = $(".lien_autre").html();
+		$("#sous_menu_page ul").prepend("<li class=''>"+l_contact2+"</li>");
+		$("#sous_menu_page ul").prepend("<li class='active'>"+l_contact+"</li>");
+		
+		$(".lien_contact").remove();
+			$(".lien_autre").remove();
+		//var menu = new NavigationMenu({ parent : "#sous_menu_page", type : "tracker" });
+	
+		$("#sous_menu_page li").hover(function(){
+			var class_active = $(this).hasClass("active");
+			if(!class_active) {
+				//$(".active").addClass("out");
+			}
+			else {
+				//$(".active").removeClass("out");
+			}
+			
+			},function(){
+				//$(".active").removeClass("out");
+		});
+		//$(".bg_move").css("margin-left" , 243);
+	</script>
+	
+</div> <!-- sous_menu_page -->
+<div id="bloc_titre_page" class="bottom10">
+	<div id="fil_arbo" class="petit">
+		<a href="{% url index %}"><img class="inline" src="{{ MEDIA_URL }}images/icon_home.png" /></a> > <a href="#" class="gris"> Autres rubriques </a> > <a href="#" class="bleu"> Actualités</a>
+	</div>
+	<h1 class="uppercase light top20">Actualités</h1>
+</div> <!-- bloc_titre_page -->
+{% endblock %}
+{% block carousel %} 
+<div id="photo_page">
+	<img src="{{ MEDIA_URL }}images/autres.png" />
+</div>
+{% endblock %}
+{% block corps %}
+<div id="contenu_page" class="top30">
+	{% for object in object_list %}
+	  {% with object.creation_date|date:"DATE_FORMAT" as date_creation %}
+	  {% with object.html_content|truncatewords_html:100|safe as object_content %}
+			<div class="actu resume_article">
+				<ul class="horizontal">
+					<li class="thumb_actu"><a href="{{ object.get_absolute_url }}"><img src="{% thumbnail object.contenu_media1.miniature 250x211 crop %}" alt="{{ object.title }}" /></a></li>
+					<li class="txt_actu">
+						<span class="block bold">{{ object.creation_date|date:"d F Y" }}</span>
+						<h2 class="bleu top5 bottom0"><a href="{{ object.get_absolute_url }}" class="bleu">{{ object.title }}</a></h2>
+						<p>
+						{{ object.excerpt|truncatewords_html:50|safe }} 
+						</p>
+						<a href="{{ object.get_absolute_url }}" class="btn_bleu right">lire la suite</a>
+						</li>
+				</ul>
+				<div class="clr"></div>
+				{% comment %}
+				{% include "zinnia/_social.html" %}
+				{% endcomment %}
+			</div>
+		 
+	  {% endwith %}
+	  {% endwith %}
+	{% empty %}
+	  <p class="notice">{% trans "No entries yet." %}</p>
+	{% endfor %}
+	<div class="clr"></div>		
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ebbbd3008659889"></script>
+</div>
+{% endblock %}
+{% block bloc1_offre %} {% endblock %}
+{% block cont_bas %}{% endblock %}
+{% comment %} 
+	<div id="haut_content" class="centerAuto">
+		<h1>{{ category }}</h1>
+		<form class="top10"> 
+			<p> 
+					{% block select_category %}{% get_categories %}{% endblock %}
+			</p>
+		</form>
+	 </div> <!-- haut content -->
+ {% ifchanged date_creation %}
+     	<div class="date_act top15">{{ date_creation }}</div>
+ {% endifchanged %}
+{% endcomment %}

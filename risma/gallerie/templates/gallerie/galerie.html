@@ -1,0 +1,9 @@
+{% load thumbnail %}
+<div id="{{ div_id }}" class="">
+	<ul class="horizontal">
+	{% for photo in photos %}
+		<li><img src="{% thumbnail photo.photo taille crop %}" alt="{{ photo.titre }}" /></li>
+	{% endfor %} 
+	</ul>
+	<div class="clr"></div>
+</div>
